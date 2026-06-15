@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Lernpfad: Vereinigung in der Vierfeldtafel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 12px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 28px 20px 22px;
+            text-align: center;
+        }
+        header h1 { font-size: 1.5em; margin-bottom: 6px; line-height: 1.3; }
+        header p { font-size: 0.95em; opacity: 0.9; }
+
+        .main-content { padding: 20px 16px 30px; }
+
+        /* START PAGE */
+        .intro-section {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 16px;
+            margin-bottom: 24px;
+            border-radius: 8px;
+        }
+        .intro-section h2 { font-size: 1.15em; margin-bottom: 8px; color: #333; }
+        .intro-section p { color: #555; font-size: 0.95em; line-height: 1.6; }
+
+        .example-box {
+            background: #fff9e6;
+            border-left: 4px solid #ff9800;
+            padding: 14px;
+            margin-top: 14px;
+            border-radius: 8px;
+        }
+        .example-box h4 { color: #e65100; margin-bottom: 8px; font-size: 0.95em; }
+        .example-box p { color: #555; font-size: 0.9em; line-height: 1.5; }
+
+        .pathway-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .pathway-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .pathway-card:hover, .pathway-card:active {
+            border-color: #667eea;
+            box-shadow: 0 4px 16px rgba(102,126,234,0.2);
+            transform: translateY(-2px);
+        }
+        .pathway-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
+        .pathway-card-text h3 { color: #333; font-size: 1em; margin-bottom: 5px; }
+        .pathway-card-text p { color: #666; font-size: 0.88em; line-height: 1.5; }
+        .difficulty {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .difficulty.easy { background: #d4edda; color: #155724; }
+        .difficulty.medium { background: #fff3cd; color: #856404; }
+        .difficulty.hard { background: #f8d7da; color: #721c24; }
+
+        /* PATHWAY PAGES */
+        .pathway-content { display: none; }
+        .pathway-content.active { display: block; }
+        #start-page { display: none; }
+        #start-page.active { display: block; }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+            background: #e9ecef;
+            color: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            border: none;
+            font-weight: 600;
+        }
+        .back-button:hover { background: #667eea; color: white; }
+
+        .pathway-header { margin-bottom: 22px; }
+        .pathway-header h2 { color: #667eea; font-size: 1.2em; margin-bottom: 4px; }
+        .pathway-header p { color: #888; font-size: 0.9em; font-family: monospace; }
+
+        /* STEPS */
+        .step { display: none; }
+        .step.active { display: block; }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .step-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .step-title { color: #333; font-size: 1.05em; font-weight: bold; }
+
+        .step-body { color: #444; line-height: 1.7; font-size: 0.95em; }
+        .step-body p { margin-bottom: 12px; }
+        .step-body ul { margin-left: 18px; margin-bottom: 12px; }
+        .step-body li { margin-bottom: 4px; }
+
+        /* MINI TABLE */
+        .mini-table-container {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 14px 0;
+            border-left: 4px solid #667eea;
+        }
+        .mini-table-container p { font-size: 0.8em; color: #666; margin-bottom: 8px; font-weight: bold; }
+        .mini-table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            font-size: 0.75em;
+        }
+        .mini-table th, .mini-table td {
+            border: 1px solid #999;
+            padding: 5px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .mini-table th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        .mini-table td.highlight-yes { background: #fffacd; font-weight: bold; }
+        .mini-table td.highlight-no { background: #ffd6d6; font-weight: bold; }
+        .mini-table td.total-col { background: #e8ecf5; font-weight: bold; }
+        .mini-table tr.total-row th, .mini-table tr.total-row td { background: #e8ecf5; font-weight: bold; }
+
+        /* TABLES */
+        .table-wrapper { overflow-x: auto; margin: 16px 0; -webkit-overflow-scrolling: touch; }
+        table {
+            border-collapse: collapse;
+            min-width: 100%;
+            background: white;
+            font-size: 0.88em;
+        }
+        th, td {
+            border: 2px solid #ccc;
+            padding: 10px 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        td.highlight-yes { background: #fffacd; font-weight: bold; }
+        td.highlight-no { background: #ffd6d6; font-weight: bold; }
+        td.total-col { background: #f0f0f0; font-weight: bold; }
+        tr.total-row th, tr.total-row td { background: #f0f0f0; font-weight: bold; }
+
+        /* BOXES */
+        .formula-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            text-align: center;
+        }
+        .note-box {
+            background: #fff9e6;
+            border-left: 4px solid #ff9800;
+            padding: 14px;
+            margin: 14px 0;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        .result-box {
+            background: #d4edda;
+            border-left: 4px solid #4caf50;
+            padding: 14px;
+            margin: 14px 0;
+            border-radius: 8px;
+            font-size: 0.95em;
+        }
+        .merkschema {
+            background: linear-gradient(135deg, #f5f7fa, #e8ecf5);
+            border: 2px solid #667eea;
+            padding: 20px 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+        .merkschema h3 { color: #667eea; margin-bottom: 14px; font-size: 1em; text-align: center; }
+        .merkschema-formula {
+            background: white;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #333;
+            margin: 10px 0;
+            border-left: 4px solid #764ba2;
+            text-align: center;
+        }
+        .merkschema-example {
+            background: #f0f8ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            border-left: 4px solid #667eea;
+            font-size: 0.88em;
+            line-height: 1.6;
+        }
+
+        /* STEP NAV */
+        .step-nav {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+            justify-content: space-between;
+        }
+        .step-nav button { flex: 1; }
+
+        /* QUIZ */
+        .quiz-container {
+            background: #f5f7fa;
+            padding: 20px 16px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .quiz-title { font-size: 1.05em; color: #667eea; margin-bottom: 16px; font-weight: bold; }
+        .quiz-question {
+            background: white;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .quiz-question h4 { color: #333; margin-bottom: 12px; font-size: 0.95em; line-height: 1.5; }
+        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+        .quiz-option {
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            background: white;
+        }
+        .quiz-option:hover { border-color: #667eea; background: #f8f9ff; }
+        .quiz-option.correct { background: #d4edda; border-color: #4caf50; }
+        .quiz-option.incorrect { background: #f8d7da; border-color: #dc3545; }
+        .quiz-feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.88em;
+            font-weight: bold;
+            display: none;
+        }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #d4edda; color: #155724; }
+        .quiz-feedback.incorrect { background: #f8d7da; color: #721c24; }
+
+        .completion-message {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border: 2px solid #4caf50;
+            color: #155724;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 14px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.95em;
+            display: none;
+        }
+        .completion-message.show { display: block; }
+
+        /* BUTTONS */
+        button {
+            padding: 12px 18px;
+            font-size: 0.95em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-weight: bold;
+            touch-action: manipulation;
+        }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-primary:hover { background: #5568d3; }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn-secondary:hover { background: #5a6268; }
+        .btn-success { background: #4caf50; color: white; width: 100%; margin-top: 6px; }
+        .btn-success:hover { background: #45a049; }
+
+        /* SUMMARY */
+        .summary-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #f5f7fa, #e8ecf5);
+            border: 2px solid #667eea;
+            padding: 16px;
+            border-radius: 12px;
+        }
+        .summary-card h4 { color: #667eea; margin-bottom: 10px; font-size: 0.95em; }
+        .summary-formula {
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.88em;
+            margin-bottom: 8px;
+            border-left: 4px solid #764ba2;
+            text-align: center;
+        }
+        .summary-card p { color: #666; font-size: 0.85em; }
+        
+        .summary-table-wrapper {
+            background: white;
+            padding: 8px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 0.7em;
+            overflow-x: auto;
+        }
+        .summary-table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 1em;
+        }
+        .summary-table th, .summary-table td {
+            border: 1px solid #999;
+            padding: 4px 3px;
+            text-align: center;
+        }
+        .summary-table th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        .summary-table td.hl { background: #fffacd; font-weight: bold; }
+        .summary-table td.hlr { background: #ffd6d6; }
+        .summary-table td.tot { background: #e8ecf5; }
+
+        /* SCENARIOS */
+        .scenario-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 18px 16px;
+            margin-bottom: 16px;
+        }
+        .scenario-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 6px;
+            padding: 3px 10px;
+            font-size: 0.78em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .scenario-card h4 { font-size: 0.95em; color: #333; margin-bottom: 10px; }
+        .scenario-table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin: 10px 0; }
+        .scenario-table th, .scenario-table td {
+            border: 1px solid #ccc;
+            padding: 7px 6px;
+            text-align: center;
+        }
+        .scenario-table th { background: #667eea; color: white; }
+        .scenario-table td.hl { background: #fffacd; font-weight: bold; }
+        .scenario-table td.hlr { background: #ffd6d6; font-weight: bold; }
+        .scenario-table td.tot { background: #f0f0f0; font-weight: bold; }
+
+        @media (max-width: 400px) {
+            header h1 { font-size: 1.25em; }
+            .main-content { padding: 16px 12px 24px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>🎲 Vereinigung in der Vierfeldtafel</h1>
+        <p>Drei Wege, um A∪B zu berechnen</p>
+    </header>
+
+    <div class="main-content">
+
+        <!-- START PAGE -->
+        <div id="start-page" class="active">
+            <div class="intro-section">
+                <h2>Willkommen zum Lernpfad!</h2>
+                <p>Du lernst drei Methoden, um die Vereinigung A∪B zu berechnen. Wähle den Einstieg, der zu dir passt!</p>
+                <div class="example-box">
+                    <h4>🎯 Das Beispiel durch alle Pfade:</h4>
+                    <p>Im Sportclub wurden <strong>75 Mitglieder</strong> gefragt:<br>
+                    „Trainierst du regelmäßig?" und „Magst du Mathematik?"</p>
+                </div>
+            </div>
+
+            <h2 style="text-align:center; margin-bottom:16px; color:#333; font-size:1.05em;">Wähle deinen Lernpfad</h2>
+
+            <div class="pathway-selection">
+                <div class="pathway-card" onclick="selectPathway(1)">
+                    <div class="pathway-number">1</div>
+                    <div class="pathway-card-text">
+                        <h3>Direkt aus der Tafel ablesen</h3>
+                        <p>Addiere die passenden Felder direkt in der Vierfeldtafel – einfach und schnell.</p>
+                        <span class="difficulty easy">🟢 Leicht</span>
+                    </div>
+                </div>
+                <div class="pathway-card" onclick="selectPathway(2)">
+                    <div class="pathway-number">2</div>
+                    <div class="pathway-card-text">
+                        <h3>Der Additionssatz</h3>
+                        <p>Nutze die Formel: H(A∪B) = H(A) + H(B) − H(A∩B)</p>
+                        <span class="difficulty medium">🟡 Mittel</span>
+                    </div>
+                </div>
+                <div class="pathway-card" onclick="selectPathway(3)">
+                    <div class="pathway-number">3</div>
+                    <div class="pathway-card-text">
+                        <h3>Über das Gegenereignis</h3>
+                        <p>Berechne H(A∪B) = N − H(Ā∩B̄) – der elegante Umweg.</p>
+                        <span class="difficulty hard">🔴 Anspruchsvoll</span>
+                    </div>
+                </div>
+                <div class="pathway-card" onclick="selectPathway(4)">
+                    <div class="pathway-number">∑</div>
+                    <div class="pathway-card-text">
+                        <h3>Zusammenfassung & Übung</h3>
+                        <p>Alle drei Methoden im Überblick – mit Übungsaufgaben.</p>
+                        <span class="difficulty easy">🟣 Alle Methoden</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PFAD 1 -->
+        <div id="pathway-1" class="pathway-content">
+            <button class="back-button" onclick="goBack()">← Übersicht</button>
+            <div class="pathway-header">
+                <h2>Methode 1: Direkt aus der Tafel</h2>
+                <p>H(A∪B) = H(A∩B) + H(A∩B̄) + H(Ā∩B)</p>
+            </div>
+
+            <!-- SCHRITT 1 -->
+            <div class="step active" data-step="1">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 1</span>
+                    <span class="step-title">Was bedeutet A∪B?</span>
+                </div>
+                <div class="step-body">
+                    <div class="example-box">
+                        <h4>📊 Sportclub:</h4>
+                        <p><strong>A</strong> = trainiert regelmäßig<br>
+                        <strong>B</strong> = mag Mathematik<br><br>
+                        <strong>A∪B</strong> = trainiert ODER mag Mathe (oder beides)</p>
+                    </div>
+                    <p style="margin-top:14px;">Zur Vereinigung gehören:</p>
+                    <ul>
+                        <li>trainiert UND mag Mathe ✓</li>
+                        <li>trainiert, aber mag Mathe nicht ✓</li>
+                        <li>mag Mathe, trainiert aber nicht ✓</li>
+                    </ul>
+                    <div class="note-box">⛔ <strong>Nicht dabei:</strong> Weder trainiert noch mag Mathe – das ist das einzige ausgeschlossene Feld!</div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="goBack()">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(2,1)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 2 -->
+            <div class="step" data-step="2">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 2</span>
+                    <span class="step-title">Die Vierfeldtafel</span>
+                </div>
+                <div class="step-body">
+                    <p>Die Daten des Sportclubs:</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th>Mag Mathe<br>(B)</th>
+                                <th>Mag Mathe<br>nicht (B̄)</th>
+                                <th>Gesamt</th>
+                            </tr>
+                            <tr>
+                                <th>Trainiert (A)</th>
+                                <td class="highlight-yes">15</td>
+                                <td class="highlight-yes">19</td>
+                                <td class="total-col">34</td>
+                            </tr>
+                            <tr>
+                                <th>Trainiert<br>nicht (Ā)</th>
+                                <td class="highlight-yes">11</td>
+                                <td class="highlight-no">30</td>
+                                <td class="total-col">41</td>
+                            </tr>
+                            <tr class="total-row">
+                                <th>Gesamt</th>
+                                <td>26</td>
+                                <td>49</td>
+                                <td>75</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p><span style="background:#fffacd;padding:2px 6px;border-radius:4px;font-weight:bold;">Gelb</span> = gehört zu A∪B &nbsp;&nbsp; <span style="background:#ffd6d6;padding:2px 6px;border-radius:4px;font-weight:bold;">Rot</span> = gehört NICHT dazu</p>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(1,1)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(3,1)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 3 -->
+            <div class="step" data-step="3">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 3</span>
+                    <span class="step-title">Felder addieren</span>
+                </div>
+                <div class="step-body">
+                    <p>Addiere alle drei gelben Felder:</p>
+                    <div class="mini-table-container">
+                        <p>Verwendete Felder:</p>
+                        <table class="mini-table">
+                            <tr>
+                                <th></th>
+                                <th>B</th>
+                                <th>B̄</th>
+                                <th>Gesamt</th>
+                            </tr>
+                            <tr>
+                                <th>A</th>
+                                <td class="highlight-yes">15</td>
+                                <td class="highlight-yes">19</td>
+                                <td class="total-col">34</td>
+                            </tr>
+                            <tr>
+                                <th>Ā</th>
+                                <td class="highlight-yes">11</td>
+                                <td class="highlight-no">30</td>
+                                <td class="total-col">41</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="formula-box">
+                        H(A∪B) = 15 + 19 + 11 = <strong>45</strong>
+                    </div>
+                    <div class="result-box">
+                        ✓ <strong>45 Mitglieder</strong> trainieren regelmäßig ODER mögen Mathematik (oder beides).
+                    </div>
+                    <div class="note-box">
+                        💡 Die 30 Personen im roten Feld (weder noch) werden einfach nicht mitgezählt!
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(2,1)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(4,1)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 4 -->
+            <div class="step" data-step="4">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 4</span>
+                    <span class="step-title">Merkschema</span>
+                </div>
+                <div class="step-body">
+                    <div class="merkschema">
+                        <h3>📋 Merkschema – Methode 1</h3>
+                        <div class="merkschema-formula">
+                            H(A∪B) = H(A∩B) + H(A∩B̄) + H(Ā∩B)
+                        </div>
+                        <div class="merkschema-example">
+                            <strong>Sportclub-Beispiel:</strong><br>
+                            H(A∪B) = 15 + 19 + 11 = <strong>45</strong><br><br>
+                            ✓ Addiere die 3 gelben Felder.<br>
+                            ✓ Das rote Feld (Ā∩B̄) bleibt außen vor.
+                        </div>
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(3,1)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(5,1)">Zum Quiz →</button>
+                </div>
+            </div>
+
+            <!-- QUIZ -->
+            <div class="step" data-step="5">
+                <div class="quiz-container">
+                    <div class="quiz-title">✓ Teste dein Verständnis</div>
+                    <div class="quiz-question">
+                        <h4>Frage 1: Welches Feld gehört NICHT zu A∪B?</h4>
+                        <div class="quiz-options" id="p1q1-opts"></div>
+                        <div class="quiz-feedback" id="p1q1-fb"></div>
+                    </div>
+                    <div class="quiz-question">
+                        <h4>Frage 2: Wie viele Personen gehören zu A∪B?</h4>
+                        <div class="quiz-options" id="p1q2-opts"></div>
+                        <div class="quiz-feedback" id="p1q2-fb"></div>
+                    </div>
+                    <button class="btn-success" onclick="checkQuiz('p1')">Antworten prüfen</button>
+                    <div class="completion-message" id="p1-complete">🎉 Sehr gut! Du beherrschst Methode 1!</div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(4,1)">← Zurück</button>
+                    <button class="btn-primary" onclick="selectPathway(2)">Zu Methode 2 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PFAD 2 -->
+        <div id="pathway-2" class="pathway-content">
+            <button class="back-button" onclick="goBack()">← Übersicht</button>
+            <div class="pathway-header">
+                <h2>Methode 2: Der Additionssatz</h2>
+                <p>H(A∪B) = H(A) + H(B) − H(A∩B)</p>
+            </div>
+
+            <!-- SCHRITT 1 -->
+            <div class="step active" data-step="1">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 1</span>
+                    <span class="step-title">Das Problem mit einfachem Addieren</span>
+                </div>
+                <div class="step-body">
+                    <div class="example-box">
+                        <h4>📊 Sportclub:</h4>
+                        <p><strong>H(A)</strong> = trainiert regelmäßig = <strong>34</strong><br>
+                        <strong>H(B)</strong> = mag Mathe = <strong>26</strong><br>
+                        <strong>H(A∩B)</strong> = trainiert UND mag Mathe = <strong>15</strong></p>
+                    </div>
+                    <p style="margin-top:14px;">Was passiert, wenn wir einfach addieren?</p>
+                    <div class="formula-box">34 + 26 = <strong>60</strong> ?</div>
+                    <div class="note-box">
+                        ⚠️ <strong>Achtung!</strong> Die 15 Personen, die trainieren UND Mathe mögen, wurden zweimal gezählt – einmal in H(A) und einmal in H(B)!
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="goBack()">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(2,2)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 2 -->
+            <div class="step" data-step="2">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 2</span>
+                    <span class="step-title">Die Lösung: einmal abziehen</span>
+                </div>
+                <div class="step-body">
+                    <p>Was doppelt gezählt wurde, muss einmal abgezogen werden:</p>
+                    <div class="formula-box">
+                        H(A∪B) = H(A) + H(B) − H(A∩B)
+                    </div>
+                    <div class="mini-table-container">
+                        <p>Die Tafel mit markierten Werten:</p>
+                        <table class="mini-table">
+                            <tr>
+                                <th></th>
+                                <th>B</th>
+                                <th>B̄</th>
+                                <th>Gesamt</th>
+                            </tr>
+                            <tr>
+                                <th>A</th>
+                                <td class="highlight-yes">15 ← 2x</td>
+                                <td>19</td>
+                                <td class="tot">34</td>
+                            </tr>
+                            <tr>
+                                <th>Ā</th>
+                                <td>11</td>
+                                <td>30</td>
+                                <td class="tot">41</td>
+                            </tr>
+                            <tr class="total-row">
+                                <th>Gesamt</th>
+                                <td class="tot">26</td>
+                                <td>49</td>
+                                <td class="tot">75</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p>H(A) zählt die <strong>15</strong> mit. H(B) zählt die <strong>15</strong> nochmal. Also −15!</p>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(1,2)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(3,2)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 3 -->
+            <div class="step" data-step="3">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 3</span>
+                    <span class="step-title">Rechnung durchführen</span>
+                </div>
+                <div class="step-body">
+                    <div class="example-box">
+                        <h4>📊 Werte einsetzen:</h4>
+                        <p>H(A) = 34 &nbsp;|&nbsp; H(B) = 26 &nbsp;|&nbsp; H(A∩B) = 15</p>
+                    </div>
+                    <div class="formula-box">
+                        H(A∪B) = 34 + 26 − 15 = <strong>45</strong>
+                    </div>
+                    <div class="result-box">
+                        ✓ <strong>45 Mitglieder</strong> – gleiches Ergebnis wie Methode 1!
+                    </div>
+                    <div class="note-box">
+                        💡 <strong>Vorteil dieser Methode:</strong> Du brauchst keine vollständige Vierfeldtafel. Es reichen H(A), H(B) und H(A∩B).
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(2,2)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(4,2)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 4 -->
+            <div class="step" data-step="4">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 4</span>
+                    <span class="step-title">Merkschema</span>
+                </div>
+                <div class="step-body">
+                    <div class="merkschema">
+                        <h3>📋 Merkschema – Methode 2</h3>
+                        <div class="merkschema-formula">
+                            H(A∪B) = H(A) + H(B) − H(A∩B)
+                        </div>
+                        <div class="merkschema-example">
+                            <strong>Sportclub-Beispiel:</strong><br>
+                            H(A∪B) = 34 + 26 − 15 = <strong>45</strong><br><br>
+                            ✓ Addiere die Zeilensumme und Spaltensumme<br>
+                            ✓ Ziehe den Schnitt ab (er wurde doppelt gezählt)
+                        </div>
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(3,2)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(5,2)">Zum Quiz →</button>
+                </div>
+            </div>
+
+            <!-- QUIZ -->
+            <div class="step" data-step="5">
+                <div class="quiz-container">
+                    <div class="quiz-title">✓ Teste dein Verständnis</div>
+                    <div class="quiz-question">
+                        <h4>Frage 1: Warum zieht man H(A∩B) ab?</h4>
+                        <div class="quiz-options" id="p2q1-opts"></div>
+                        <div class="quiz-feedback" id="p2q1-fb"></div>
+                    </div>
+                    <div class="quiz-question">
+                        <h4>Frage 2: H(A) = 34, H(B) = 26, H(A∩B) = 15. Was ist H(A∪B)?</h4>
+                        <div class="quiz-options" id="p2q2-opts"></div>
+                        <div class="quiz-feedback" id="p2q2-fb"></div>
+                    </div>
+                    <button class="btn-success" onclick="checkQuiz('p2')">Antworten prüfen</button>
+                    <div class="completion-message" id="p2-complete">🎉 Excellent! Du beherrschst den Additionssatz!</div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(4,2)">← Zurück</button>
+                    <button class="btn-primary" onclick="selectPathway(3)">Zu Methode 3 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PFAD 3 -->
+        <div id="pathway-3" class="pathway-content">
+            <button class="back-button" onclick="goBack()">← Übersicht</button>
+            <div class="pathway-header">
+                <h2>Methode 3: Über das Gegenereignis</h2>
+                <p>H(A∪B) = N − H(Ā∩B̄)</p>
+            </div>
+
+            <!-- SCHRITT 1 -->
+            <div class="step active" data-step="1">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 1</span>
+                    <span class="step-title">Die umgekehrte Perspektive</span>
+                </div>
+                <div class="step-body">
+                    <p>Manchmal ist es leichter, das Gegenteil zu betrachten:</p>
+                    <div class="example-box">
+                        <h4>💡 Idee:</h4>
+                        <p>Statt zu fragen „Wer trainiert ODER mag Mathe?", fragen wir:<br><br>
+                        „Wer trainiert <strong>NICHT</strong> UND mag Mathe <strong>NICHT</strong>?"<br><br>
+                        Diese Personen abziehen ergibt die Antwort!</p>
+                    </div>
+                    <div class="note-box">
+                        Das Gegenereignis von „A ODER B" ist „NICHT A UND NICHT B" = Ā∩B̄
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="goBack()">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(2,3)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 2 -->
+            <div class="step" data-step="2">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 2</span>
+                    <span class="step-title">Das Gegenereignis in der Tafel</span>
+                </div>
+                <div class="step-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th>Mag Mathe<br>(B)</th>
+                                <th>Mag Mathe<br>nicht (B̄)</th>
+                                <th>Gesamt</th>
+                            </tr>
+                            <tr>
+                                <th>Trainiert (A)</th>
+                                <td>15</td>
+                                <td>19</td>
+                                <td class="total-col">34</td>
+                            </tr>
+                            <tr>
+                                <th>Trainiert<br>nicht (Ā)</th>
+                                <td>11</td>
+                                <td class="highlight-no">30 ← Ā∩B̄</td>
+                                <td class="total-col">41</td>
+                            </tr>
+                            <tr class="total-row">
+                                <th>Gesamt</th>
+                                <td>26</td>
+                                <td>49</td>
+                                <td>75</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p>Das rote Feld (30 Personen) ist das Gegenereignis Ā∩B̄ – <strong>weder trainiert noch Mathe</strong>.</p>
+                    <div class="note-box">
+                        Alle anderen 45 Personen gehören zu A∪B!
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(1,3)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(3,3)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 3 -->
+            <div class="step" data-step="3">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 3</span>
+                    <span class="step-title">Rechnung durchführen</span>
+                </div>
+                <div class="step-body">
+                    <div class="example-box">
+                        <h4>📊 Sportclub:</h4>
+                        <p>H(Ā∩B̄) = <strong>30</strong> (weder trainiert noch Mathe)<br>
+                        Gesamtzahl N = <strong>75</strong></p>
+                    </div>
+                    <div class="mini-table-container">
+                        <p>Vierfeldtafel mit markiertem Feld:</p>
+                        <table class="mini-table">
+                            <tr>
+                                <th></th>
+                                <th>B</th>
+                                <th>B̄</th>
+                            </tr>
+                            <tr>
+                                <th>A</th>
+                                <td>15</td>
+                                <td>19</td>
+                            </tr>
+                            <tr>
+                                <th>Ā</th>
+                                <td>11</td>
+                                <td class="hlr">30</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="formula-box">
+                        H(A∪B) = 75 − 30 = <strong>45</strong>
+                    </div>
+                    <div class="result-box">
+                        ✓ <strong>45 Mitglieder</strong> trainieren regelmäßig ODER mögen Mathematik!
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(2,3)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(4,3)">Zum Quiz →</button>
+                </div>
+            </div>
+
+            <!-- QUIZ -->
+            <div class="step" data-step="4">
+                <div class="quiz-container">
+                    <div class="quiz-title">✓ Teste dein Verständnis</div>
+                    <div class="quiz-question">
+                        <h4>Frage 1: Was ist das Gegenereignis von A∪B?</h4>
+                        <div class="quiz-options" id="p3q1-opts"></div>
+                        <div class="quiz-feedback" id="p3q1-fb"></div>
+                    </div>
+                    <div class="quiz-question">
+                        <h4>Frage 2: N = 100, H(Ā∩B̄) = 25. Was ist H(A∪B)?</h4>
+                        <div class="quiz-options" id="p3q2-opts"></div>
+                        <div class="quiz-feedback" id="p3q2-fb"></div>
+                    </div>
+                    <button class="btn-success" onclick="checkQuiz('p3')">Antworten prüfen</button>
+                    <div class="completion-message" id="p3-complete">🎉 Perfekt! Du beherrschst die Gegenereignis-Methode!</div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(3,3)">← Zurück</button>
+                    <button class="btn-primary" onclick="selectPathway(4)">Zur Zusammenfassung →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ZUSAMMENFASSUNG -->
+        <div id="pathway-4" class="pathway-content">
+            <button class="back-button" onclick="goBack()">← Übersicht</button>
+            <h2 style="color:#667eea; margin-bottom:6px; font-size:1.2em;">📊 Alle Methoden im Überblick</h2>
+            <p style="color:#888; font-size:0.9em; margin-bottom:20px;">Wann nutzt du welche Methode?</p>
+
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h4>Methode 1 – Direkt aus der Tafel</h4>
+                    <div class="summary-formula">H(A∪B) = H(A∩B) + H(A∩B̄) + H(Ā∩B)</div>
+                    <div class="summary-table-wrapper">
+                        <table class="summary-table">
+                            <tr><th></th><th>B</th><th>B̄</th></tr>
+                            <tr><th>A</th><td class="hl">✓</td><td class="hl">✓</td></tr>
+                            <tr><th>Ā</th><td class="hl">✓</td><td class="hlr">✗</td></tr>
+                        </table>
+                    </div>
+                    <p>✓ Alle 4 Felder sichtbar &nbsp;✓ Schnellster Weg</p>
+                </div>
+                <div class="summary-card">
+                    <h4>Methode 2 – Additionssatz</h4>
+                    <div class="summary-formula">H(A∪B) = H(A) + H(B) − H(A∩B)</div>
+                    <div class="summary-table-wrapper">
+                        <table class="summary-table">
+                            <tr><th></th><th>B</th><th>B̄</th><th style="background:#e8ecf5;">Σ</th></tr>
+                            <tr><th>A</th><td class="hl">✓</td><td style="background:white;">−</td><td class="tot">✓</td></tr>
+                            <tr><th>Ā</th><td style="background:white;">−</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
+                            <tr><th style="background:#e8ecf5;">Σ</th><td class="tot">✓</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
+                        </table>
+                    </div>
+                    <p>✓ Nur Randsummen nötig &nbsp;✓ Universell einsetzbar</p>
+                </div>
+                <div class="summary-card">
+                    <h4>Methode 3 – Gegenereignis</h4>
+                    <div class="summary-formula">H(A∪B) = N − H(Ā∩B̄)</div>
+                    <div class="summary-table-wrapper">
+                        <table class="summary-table">
+                            <tr><th></th><th>B</th><th>B̄</th></tr>
+                            <tr><th>A</th><td style="background:white;">−</td><td style="background:white;">−</td></tr>
+                            <tr><th>Ā</th><td style="background:white;">−</td><td class="hlr">✓</td></tr>
+                        </table>
+                    </div>
+                    <p>✓ Wenn Ā∩B̄ besonders klein &nbsp;✓ Eleganter Umweg</p>
+                </div>
+            </div>
+
+            <h3 style="color:#333; margin-bottom:16px; font-size:1.05em;">🎯 Drei Szenarien – eine Methode passt am besten</h3>
+
+            <!-- SZENARIO 1 -->
+            <div class="scenario-card">
+                <div class="scenario-badge">Szenario 1 → Methode 1</div>
+                <h4>Klassenumfrage: Sport oder Musik?</h4>
+                <p style="font-size:0.88em; color:#555; margin-bottom:10px;">30 Schüler wurden gefragt. Die vollständige Tafel liegt vor:</p>
+                <div class="table-wrapper">
+                    <table class="scenario-table">
+                        <tr>
+                            <th></th>
+                            <th>Musik (B)</th>
+                            <th>Kein Musik (B̄)</th>
+                            <th>Gesamt</th>
+                        </tr>
+                        <tr>
+                            <th>Sport (A)</th>
+                            <td class="hl">8</td>
+                            <td class="hl">10</td>
+                            <td class="tot">18</td>
+                        </tr>
+                        <tr>
+                            <th>Kein Sport (Ā)</th>
+                            <td class="hl">6</td>
+                            <td class="hlr">6</td>
+                            <td class="tot">12</td>
+                        </tr>
+                        <tr>
+                            <th>Gesamt</th>
+                            <td class="tot">14</td>
+                            <td class="tot">16</td>
+                            <td class="tot">30</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="quiz-question" style="margin-top:14px;">
+                    <h4>Wie viele Schüler treiben Sport ODER hören Musik?</h4>
+                    <div class="quiz-options" id="s1-opts"></div>
+                    <div class="quiz-feedback" id="s1-fb"></div>
+                    <p style="font-size:0.82em; color:#888; margin-top:8px;">Tipp: Addiere die 3 gelben Felder!</p>
+                </div>
+            </div>
+
+            <!-- SZENARIO 2 -->
+            <div class="scenario-card">
+                <div class="scenario-badge">Szenario 2 → Methode 2</div>
+                <h4>Kino-Umfrage: Nur Randwerte bekannt</h4>
+                <p style="font-size:0.88em; color:#555; margin-bottom:10px;">Von 50 Befragten:</p>
+                <ul style="font-size:0.88em; color:#444; margin-left:16px; margin-bottom:10px; line-height:1.8;">
+                    <li>H(A) = 30 mögen Actionfilme</li>
+                    <li>H(B) = 25 mögen Komödien</li>
+                    <li>H(A∩B) = 10 mögen beides</li>
+                </ul>
+                <div class="quiz-question" style="margin-top:14px;">
+                    <h4>Wie viele mögen Action ODER Komödie?</h4>
+                    <div class="quiz-options" id="s2-opts"></div>
+                    <div class="quiz-feedback" id="s2-fb"></div>
+                    <p style="font-size:0.82em; color:#888; margin-top:8px;">Tipp: H(A) + H(B) − H(A∩B)</p>
+                </div>
+            </div>
+
+            <!-- SZENARIO 3 -->
+            <div class="scenario-card">
+                <div class="scenario-badge">Szenario 3 → Methode 3</div>
+                <h4>Schulkantine: Fast alle mögen etwas</h4>
+                <p style="font-size:0.88em; color:#555; margin-bottom:10px;">80 Schüler wurden gefragt, ob sie Pasta (A) oder Salat (B) mögen. Nur <strong>5 Schüler mögen weder Pasta noch Salat</strong>.</p>
+                <div class="quiz-question" style="margin-top:14px;">
+                    <h4>Wie viele Schüler mögen Pasta ODER Salat?</h4>
+                    <div class="quiz-options" id="s3-opts"></div>
+                    <div class="quiz-feedback" id="s3-fb"></div>
+                    <p style="font-size:0.82em; color:#888; margin-top:8px;">Tipp: N − H(Ā∩B̄)</p>
+                </div>
+            </div>
+
+            <button class="btn-success" onclick="checkScenarios()" style="margin-top:8px;">Alle Antworten prüfen</button>
+            <div class="completion-message" id="summary-complete">
+                🏆 Herzlichen Glückwunsch! Du beherrschst alle drei Methoden!
+            </div>
+
+            <div class="step-nav" style="margin-top:20px;">
+                <button class="btn-secondary" onclick="goBack()">← Übersicht</button>
+                <button class="btn-primary" onclick="selectPathway(1)">Methode 1 wiederholen</button>
+            </div>
+        </div>
+
+    </div><!-- /main-content -->
+</div><!-- /container -->
+
+<script>
+    function selectPathway(n) {
+        document.querySelectorAll('.pathway-content, #start-page').forEach(el => {
+            el.classList.remove('active');
+        });
+        const target = n === 0 ? document.getElementById('start-page') : document.getElementById('pathway-' + n);
+        if (target) target.classList.add('active');
+
+        // Reset steps
+        if (n > 0 && n < 4) {
+            const steps = target.querySelectorAll('.step');
+            steps.forEach((s, i) => {
+                s.classList.remove('active');
+                if (i === 0) s.classList.add('active');
+            });
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showStep(num, pathway) {
+        const parent = document.getElementById('pathway-' + pathway);
+        if (!parent) return;
+        const steps = parent.querySelectorAll('.step');
+        steps.forEach(s => {
+            s.classList.remove('active');
+            if (parseInt(s.dataset.step) === num) s.classList.add('active');
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goBack() { selectPathway(0); }
+
+    // Randomisiere Quiz-Antworten
+    function initQuizzes() {
+        // Pfad 1, Frage 1
+        const p1q1_options = [
+            { text: 'Trainiert UND Mathe (15)', value: 'w1' },
+            { text: 'Weder trainiert noch Mathe (30)', value: 'c' },
+            { text: 'Trainiert, keine Mathe (19)', value: 'w2' }
+        ];
+        shuffleAndRender('p1q1-opts', p1q1_options, 'p1q1');
+
+        // Pfad 1, Frage 2
+        const p1q2_options = [
+            { text: '34', value: 'w1' },
+            { text: '45', value: 'c' },
+            { text: '75', value: 'w2' }
+        ];
+        shuffleAndRender('p1q2-opts', p1q2_options, 'p1q2');
+
+        // Pfad 2, Frage 1
+        const p2q1_options = [
+            { text: 'Weil H(A∩B) in H(A) und H(B) doppelt enthalten ist', value: 'c' },
+            { text: 'Es ist eine Konvention ohne Bedeutung', value: 'w1' },
+            { text: 'Weil der Schnitt nicht zur Vereinigung gehört', value: 'w2' }
+        ];
+        shuffleAndRender('p2q1-opts', p2q1_options, 'p2q1');
+
+        // Pfad 2, Frage 2
+        const p2q2_options = [
+            { text: '60', value: 'w1' },
+            { text: '45', value: 'c' },
+            { text: '35', value: 'w2' }
+        ];
+        shuffleAndRender('p2q2-opts', p2q2_options, 'p2q2');
+
+        // Pfad 3, Frage 1
+        const p3q1_options = [
+            { text: 'Ā∩B̄ (weder A noch B)', value: 'c' },
+            { text: 'A∩B', value: 'w1' },
+            { text: 'Ā∪B̄', value: 'w2' }
+        ];
+        shuffleAndRender('p3q1-opts', p3q1_options, 'p3q1');
+
+        // Pfad 3, Frage 2
+        const p3q2_options = [
+            { text: '75', value: 'c' },
+            { text: '25', value: 'w1' },
+            { text: '50', value: 'w2' }
+        ];
+        shuffleAndRender('p3q2-opts', p3q2_options, 'p3q2');
+
+        // Szenario 1
+        const s1_options = [
+            { text: '24', value: 'c' },
+            { text: '18', value: 'w1' },
+            { text: '30', value: 'w2' }
+        ];
+        shuffleAndRender('s1-opts', s1_options, 's1');
+
+        // Szenario 2
+        const s2_options = [
+            { text: '45', value: 'c' },
+            { text: '55', value: 'w1' },
+            { text: '35', value: 'w2' }
+        ];
+        shuffleAndRender('s2-opts', s2_options, 's2');
+
+        // Szenario 3
+        const s3_options = [
+            { text: '75', value: 'c' },
+            { text: '5', value: 'w1' },
+            { text: '80', value: 'w2' }
+        ];
+        shuffleAndRender('s3-opts', s3_options, 's3');
+    }
+
+    function shuffleAndRender(containerId, options, radioName) {
+        const shuffled = [...options].sort(() => Math.random() - 0.5);
+        const container = document.getElementById(containerId);
+        container.innerHTML = shuffled.map(opt => 
+            `<label class="quiz-option"><input type="radio" name="${radioName}" value="${opt.value}"> ${opt.text}</label>`
+        ).join('');
+    }
+
+    const quizData = {
+        p1: {
+            questions: [
+                { name: 'p1q1', correct: 'c', fb: 'p1q1-fb',
+                  ok: '✓ Richtig! Das Feld "weder noch" (Ā∩B̄) gehört nicht zu A∪B.',
+                  fail: '✗ Das Feld "weder noch" (Ā∩B̄) ist das einzige, das nicht zu A∪B gehört!' },
+                { name: 'p1q2', correct: 'c', fb: 'p1q2-fb',
+                  ok: '✓ Richtig! 15 + 19 + 11 = 45.',
+                  fail: '✗ Addiere die 3 gelben Felder: 15 + 19 + 11 = 45.' }
+            ],
+            complete: 'p1-complete'
+        },
+        p2: {
+            questions: [
+                { name: 'p2q1', correct: 'c', fb: 'p2q1-fb',
+                  ok: '✓ Genau! Der Schnitt ist doppelt in H(A) und H(B) enthalten.',
+                  fail: '✗ H(A∩B) ist sowohl in H(A) als auch in H(B) enthalten – also doppelt gezählt!' },
+                { name: 'p2q2', correct: 'c', fb: 'p2q2-fb',
+                  ok: '✓ Richtig! 34 + 26 − 15 = 45.',
+                  fail: '✗ Rechne: 34 + 26 − 15 = 45.' }
+            ],
+            complete: 'p2-complete'
+        },
+        p3: {
+            questions: [
+                { name: 'p3q1', correct: 'c', fb: 'p3q1-fb',
+                  ok: '✓ Korrekt! Das Gegenereignis von A∪B ist Ā∩B̄.',
+                  fail: '✗ Das Gegenereignis von A∪B ist Ā∩B̄ (weder A noch B).' },
+                { name: 'p3q2', correct: 'c', fb: 'p3q2-fb',
+                  ok: '✓ Richtig! 100 − 25 = 75.',
+                  fail: '✗ Rechne: 100 − 25 = 75.' }
+            ],
+            complete: 'p3-complete'
+        }
+    };
+
+    function checkQuiz(quizId) {
+        const data = quizData[quizId];
+        let allAnswered = true, allCorrect = true;
+        data.questions.forEach(q => {
+            const sel = document.querySelector(`input[name="${q.name}"]:checked`);
+            if (!sel) { allAnswered = false; return; }
+            const fb = document.getElementById(q.fb);
+            if (sel.value === q.correct) {
+                fb.textContent = q.ok;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                fb.textContent = q.fail;
+                fb.className = 'quiz-feedback show incorrect';
+                allCorrect = false;
+            }
+        });
+        if (!allAnswered) { alert('Bitte beantworte alle Fragen!'); return; }
+        if (allCorrect) document.getElementById(data.complete).classList.add('show');
+    }
+
+    function checkScenarios() {
+        const scenarios = [
+            { name: 's1', correct: 'c', fb: 's1-fb',
+              ok: '✓ Richtig! 8 + 10 + 6 = 24 (Methode 1).',
+              fail: '✗ Addiere die 3 gelben Felder: 8 + 10 + 6 = 24.' },
+            { name: 's2', correct: 'c', fb: 's2-fb',
+              ok: '✓ Richtig! 30 + 25 − 10 = 45 (Methode 2).',
+              fail: '✗ Additionssatz: 30 + 25 − 10 = 45.' },
+            { name: 's3', correct: 'c', fb: 's3-fb',
+              ok: '✓ Richtig! 80 − 5 = 75 (Methode 3).',
+              fail: '✗ Gegenereignis: 80 − 5 = 75.' }
+        ];
+        let allAnswered = true, allCorrect = true;
+        scenarios.forEach(s => {
+            const sel = document.querySelector(`input[name="${s.name}"]:checked`);
+            if (!sel) { allAnswered = false; return; }
+            const fb = document.getElementById(s.fb);
+            if (sel.value === s.correct) {
+                fb.textContent = s.ok;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                fb.textContent = s.fail;
+                fb.className = 'quiz-feedback show incorrect';
+                allCorrect = false;
+            }
+        });
+        if (!allAnswered) { alert('Bitte beantworte alle Fragen!'); return; }
+        if (allCorrect) document.getElementById('summary-complete').classList.add('show');
+    }
+
+    // Init
+    initQuizzes();
+    selectPathway(0);
+</script>
+</body>
+</html>
