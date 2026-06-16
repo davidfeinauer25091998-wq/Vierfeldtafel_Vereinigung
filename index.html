@@ -446,7 +446,7 @@
 <div class="container">
     <header>
         <h1>🎲 Vereinigung in der Vierfeldtafel</h1>
-        <p>Drei Wege, um A∪B zu berechnen</p>
+        <p>Drei Wege, um Ā∪B̄ zu berechnen</p>
     </header>
 
     <div class="main-content">
@@ -455,11 +455,11 @@
         <div id="start-page" class="active">
             <div class="intro-section">
                 <h2>Willkommen zum Lernpfad!</h2>
-                <p>Du lernst drei Methoden, um die Vereinigung A∪B zu berechnen. Wähle den Einstieg, der zu dir passt!</p>
+                <p>Du lernst drei Methoden, um die Vereinigung Ā∪B̄ zu berechnen. Wähle den Einstieg, der zu dir passt!</p>
                 <div class="example-box">
                     <h4>🎯 Das Beispiel durch alle Pfade:</h4>
-                    <p>Im Sportclub wurden <strong>75 Mitglieder</strong> gefragt:<br>
-                    „Trainierst du regelmäßig?" und „Magst du Mathematik?"</p>
+                    <p>Bei einer Fußball-WM werden <strong>1000 Spieler</strong> getestet:<br>
+                    80 sind gedopt, 120 testen positiv, 70 gedopte testen positiv</p>
                 </div>
             </div>
 
@@ -478,7 +478,7 @@
                     <div class="pathway-number">2</div>
                     <div class="pathway-card-text">
                         <h3>Der Additionssatz</h3>
-                        <p>Nutze die Formel: H(A∪B) = H(A) + H(B) − H(A∩B)</p>
+                        <p>Nutze die Formel: H(Ā∪B̄) = H(Ā) + H(B̄) − H(Ā∩B̄)</p>
                         <span class="difficulty medium">🟡 Mittel</span>
                     </div>
                 </div>
@@ -486,7 +486,7 @@
                     <div class="pathway-number">3</div>
                     <div class="pathway-card-text">
                         <h3>Über das Gegenereignis</h3>
-                        <p>Berechne H(A∪B) = N − H(Ā∩B̄) – der elegante Umweg.</p>
+                        <p>Berechne H(Ā∪B̄) = N − H(A∩B) – der elegante Umweg.</p>
                         <span class="difficulty hard">🔴 Anspruchsvoll</span>
                     </div>
                 </div>
@@ -506,29 +506,29 @@
             <button class="back-button" onclick="goBack()">← Übersicht</button>
             <div class="pathway-header">
                 <h2>Methode 1: Direkt aus der Tafel</h2>
-                <p>H(A∪B) = H(A∩B) + H(A∩B̄) + H(Ā∩B)</p>
+                <p>H(Ā∪B̄) = H(Ā∩B̄) + H(Ā∩B) + H(A∩B̄)</p>
             </div>
 
             <!-- SCHRITT 1 -->
             <div class="step active" data-step="1">
                 <div class="step-header">
                     <span class="step-badge">Schritt 1</span>
-                    <span class="step-title">Was bedeutet A∪B?</span>
+                    <span class="step-title">Was bedeutet Ā∪B̄?</span>
                 </div>
                 <div class="step-body">
                     <div class="example-box">
-                        <h4>📊 Sportclub:</h4>
-                        <p><strong>A</strong> = trainiert regelmäßig<br>
-                        <strong>B</strong> = mag Mathematik<br><br>
-                        <strong>A∪B</strong> = trainiert ODER mag Mathe (oder beides)</p>
+                        <h4>📊 Dopingtest:</h4>
+                        <p><strong>Ā</strong> = nicht gedopt<br>
+                        <strong>B̄</strong> = Test ist negativ<br><br>
+                        <strong>Ā∪B̄</strong> = nicht gedopt ODER negativ (oder beides)</p>
                     </div>
                     <p style="margin-top:14px;">Zur Vereinigung gehören:</p>
                     <ul>
-                        <li>trainiert UND mag Mathe ✓</li>
-                        <li>trainiert, aber mag Mathe nicht ✓</li>
-                        <li>mag Mathe, trainiert aber nicht ✓</li>
+                        <li>nicht gedopt UND negativ ✓</li>
+                        <li>nicht gedopt, aber positiv ✓</li>
+                        <li>negativ, aber gedopt ✓</li>
                     </ul>
-                    <div class="note-box">⛔ <strong>Nicht dabei:</strong> Weder trainiert noch mag Mathe – das ist das einzige ausgeschlossene Feld!</div>
+                    <div class="note-box">⛔ <strong>Nicht dabei:</strong> Gedopt UND positiv – das ist das einzige ausgeschlossene Feld!</div>
                 </div>
                 <div class="step-nav">
                     <button class="btn-secondary" onclick="goBack()">← Zurück</button>
@@ -543,36 +543,36 @@
                     <span class="step-title">Die Vierfeldtafel</span>
                 </div>
                 <div class="step-body">
-                    <p>Die Daten des Sportclubs:</p>
+                    <p>Die Daten der Dopingtests:</p>
                     <div class="table-wrapper">
                         <table>
                             <tr>
                                 <th></th>
-                                <th>Mag Mathe<br>(B)</th>
-                                <th>Mag Mathe<br>nicht (B̄)</th>
+                                <th>Test positiv<br>(B)</th>
+                                <th>Test negativ<br>(B̄)</th>
                                 <th>Gesamt</th>
                             </tr>
                             <tr>
-                                <th>Trainiert (A)</th>
-                                <td class="highlight-yes">15</td>
-                                <td class="highlight-yes">19</td>
-                                <td class="total-col">34</td>
+                                <th>Gedopt (A)</th>
+                                <td class="highlight-no">70</td>
+                                <td class="highlight-yes">10</td>
+                                <td class="total-col">80</td>
                             </tr>
                             <tr>
-                                <th>Trainiert<br>nicht (Ā)</th>
-                                <td class="highlight-yes">11</td>
-                                <td class="highlight-no">30</td>
-                                <td class="total-col">41</td>
+                                <th>Nicht gedopt<br>(Ā)</th>
+                                <td class="highlight-yes">50</td>
+                                <td class="highlight-yes">870</td>
+                                <td class="total-col">920</td>
                             </tr>
                             <tr class="total-row">
                                 <th>Gesamt</th>
-                                <td>26</td>
-                                <td>49</td>
-                                <td>75</td>
+                                <td>120</td>
+                                <td>880</td>
+                                <td>1000</td>
                             </tr>
                         </table>
                     </div>
-                    <p><span style="background:#fffacd;padding:2px 6px;border-radius:4px;font-weight:bold;">Gelb</span> = gehört zu A∪B &nbsp;&nbsp; <span style="background:#ffd6d6;padding:2px 6px;border-radius:4px;font-weight:bold;">Rot</span> = gehört NICHT dazu</p>
+                    <p><span style="background:#fffacd;padding:2px 6px;border-radius:4px;font-weight:bold;">Gelb</span> = gehört zu Ā∪B̄ (nicht gedopt ODER negativ) &nbsp;&nbsp; <span style="background:#ffd6d6;padding:2px 6px;border-radius:4px;font-weight:bold;">Rot</span> = gehört NICHT dazu (gedopt UND positiv)</p>
                 </div>
                 <div class="step-nav">
                     <button class="btn-secondary" onclick="showStep(1,1)">← Zurück</button>
@@ -599,26 +599,26 @@
                             </tr>
                             <tr>
                                 <th>A</th>
-                                <td class="highlight-yes">15</td>
-                                <td class="highlight-yes">19</td>
-                                <td class="total-col">34</td>
+                                <td class="highlight-no">70</td>
+                                <td class="highlight-yes">10</td>
+                                <td class="total-col">80</td>
                             </tr>
                             <tr>
                                 <th>Ā</th>
-                                <td class="highlight-yes">11</td>
-                                <td class="highlight-no">30</td>
-                                <td class="total-col">41</td>
+                                <td class="highlight-yes">50</td>
+                                <td class="highlight-yes">870</td>
+                                <td class="total-col">920</td>
                             </tr>
                         </table>
                     </div>
                     <div class="formula-box">
-                        H(A∪B) = 15 + 19 + 11 = <strong>45</strong>
+                        H(Ā∪B̄) = 870 + 50 + 10 = <strong>930</strong>
                     </div>
                     <div class="result-box">
-                        ✓ <strong>45 Mitglieder</strong> trainieren regelmäßig ODER mögen Mathematik (oder beides).
+                        ✓ <strong>930 Spieler</strong> sind entweder nicht gedopt ODER testen negativ (oder beides).
                     </div>
                     <div class="note-box">
-                        💡 Die 30 Personen im roten Feld (weder noch) werden einfach nicht mitgezählt!
+                        💡 Die 70 Spieler im roten Feld (gedopt UND positiv) werden nicht mitgezählt!
                     </div>
                 </div>
                 <div class="step-nav">
@@ -637,13 +637,13 @@
                     <div class="merkschema">
                         <h3>📋 Merkschema – Methode 1</h3>
                         <div class="merkschema-formula">
-                            H(A∪B) = H(A∩B) + H(A∩B̄) + H(Ā∩B)
+                            H(Ā∪B̄) = H(Ā∩B̄) + H(Ā∩B) + H(A∩B̄)
                         </div>
                         <div class="merkschema-example">
-                            <strong>Sportclub-Beispiel:</strong><br>
-                            H(A∪B) = 15 + 19 + 11 = <strong>45</strong><br><br>
+                            <strong>Dopingtest-Beispiel:</strong><br>
+                            H(Ā∪B̄) = 870 + 50 + 10 = <strong>930</strong><br><br>
                             ✓ Addiere die 3 gelben Felder.<br>
-                            ✓ Das rote Feld (Ā∩B̄) bleibt außen vor.
+                            ✓ Das rote Feld (gedopt UND positiv) bleibt außen vor.
                         </div>
                     </div>
                 </div>
@@ -658,12 +658,12 @@
                 <div class="quiz-container">
                     <div class="quiz-title">✓ Teste dein Verständnis</div>
                     <div class="quiz-question">
-                        <h4>Frage 1: Welches Feld gehört NICHT zu A∪B?</h4>
+                        <h4>Frage 1: Welches Feld gehört NICHT zu Ā∪B̄?</h4>
                         <div class="quiz-options" id="p1q1-opts"></div>
                         <div class="quiz-feedback" id="p1q1-fb"></div>
                     </div>
                     <div class="quiz-question">
-                        <h4>Frage 2: Wie viele Personen gehören zu A∪B?</h4>
+                        <h4>Frage 2: Wie viele Spieler gehören zu Ā∪B̄?</h4>
                         <div class="quiz-options" id="p1q2-opts"></div>
                         <div class="quiz-feedback" id="p1q2-fb"></div>
                     </div>
@@ -682,7 +682,7 @@
             <button class="back-button" onclick="goBack()">← Übersicht</button>
             <div class="pathway-header">
                 <h2>Methode 2: Der Additionssatz</h2>
-                <p>H(A∪B) = H(A) + H(B) − H(A∩B)</p>
+                <p>H(Ā∪B̄) = H(Ā) + H(B̄) − H(Ā∩B̄)</p>
             </div>
 
             <!-- SCHRITT 1 -->
@@ -693,15 +693,15 @@
                 </div>
                 <div class="step-body">
                     <div class="example-box">
-                        <h4>📊 Sportclub:</h4>
-                        <p><strong>H(A)</strong> = trainiert regelmäßig = <strong>34</strong><br>
-                        <strong>H(B)</strong> = mag Mathe = <strong>26</strong><br>
-                        <strong>H(A∩B)</strong> = trainiert UND mag Mathe = <strong>15</strong></p>
+                        <h4>📊 Dopingtest:</h4>
+                        <p><strong>H(Ā)</strong> = nicht gedopt = <strong>920</strong><br>
+                        <strong>H(B̄)</strong> = negativ getestet = <strong>880</strong><br>
+                        <strong>H(Ā∩B̄)</strong> = nicht gedopt UND negativ = <strong>870</strong></p>
                     </div>
                     <p style="margin-top:14px;">Was passiert, wenn wir einfach addieren?</p>
-                    <div class="formula-box">34 + 26 = <strong>60</strong> ?</div>
+                    <div class="formula-box">920 + 880 = <strong>1800</strong> ?</div>
                     <div class="note-box">
-                        ⚠️ <strong>Achtung!</strong> Die 15 Personen, die trainieren UND Mathe mögen, wurden zweimal gezählt – einmal in H(A) und einmal in H(B)!
+                        ⚠️ <strong>Achtung!</strong> Die 870 Spieler, die nicht gedopt sind UND negativ testen, wurden zweimal gezählt – einmal in H(Ā) und einmal in H(B̄)!
                     </div>
                 </div>
                 <div class="step-nav">
@@ -719,7 +719,7 @@
                 <div class="step-body">
                     <p>Was doppelt gezählt wurde, muss einmal abgezogen werden:</p>
                     <div class="formula-box">
-                        H(A∪B) = H(A) + H(B) − H(A∩B)
+                        H(Ā∪B̄) = H(Ā) + H(B̄) − H(Ā∩B̄)
                     </div>
                     <div class="mini-table-container">
                         <p>Die Tafel mit markierten Werten:</p>
@@ -732,25 +732,25 @@
                             </tr>
                             <tr>
                                 <th>A</th>
-                                <td class="highlight-yes">15 ← 2x</td>
-                                <td>19</td>
-                                <td class="tot">34</td>
+                                <td>70</td>
+                                <td>10</td>
+                                <td class="tot">80</td>
                             </tr>
                             <tr>
                                 <th>Ā</th>
-                                <td>11</td>
-                                <td>30</td>
-                                <td class="tot">41</td>
+                                <td>50</td>
+                                <td class="highlight-yes">870 ← 2x</td>
+                                <td class="tot">920</td>
                             </tr>
                             <tr class="total-row">
                                 <th>Gesamt</th>
-                                <td class="tot">26</td>
-                                <td>49</td>
-                                <td class="tot">75</td>
+                                <td>120</td>
+                                <td class="tot">880</td>
+                                <td class="tot">1000</td>
                             </tr>
                         </table>
                     </div>
-                    <p>H(A) zählt die <strong>15</strong> mit. H(B) zählt die <strong>15</strong> nochmal. Also −15!</p>
+                    <p>H(Ā) zählt die <strong>870</strong> mit. H(B̄) zählt die <strong>870</strong> nochmal. Also −870!</p>
                 </div>
                 <div class="step-nav">
                     <button class="btn-secondary" onclick="showStep(1,2)">← Zurück</button>
@@ -767,16 +767,16 @@
                 <div class="step-body">
                     <div class="example-box">
                         <h4>📊 Werte einsetzen:</h4>
-                        <p>H(A) = 34 &nbsp;|&nbsp; H(B) = 26 &nbsp;|&nbsp; H(A∩B) = 15</p>
+                        <p>H(Ā) = 920 &nbsp;|&nbsp; H(B̄) = 880 &nbsp;|&nbsp; H(Ā∩B̄) = 870</p>
                     </div>
                     <div class="formula-box">
-                        H(A∪B) = 34 + 26 − 15 = <strong>45</strong>
+                        H(Ā∪B̄) = 920 + 880 − 870 = <strong>930</strong>
                     </div>
                     <div class="result-box">
-                        ✓ <strong>45 Mitglieder</strong> – gleiches Ergebnis wie Methode 1!
+                        ✓ <strong>930 Spieler</strong> – gleiches Ergebnis wie Methode 1!
                     </div>
                     <div class="note-box">
-                        💡 <strong>Vorteil dieser Methode:</strong> Du brauchst keine vollständige Vierfeldtafel. Es reichen H(A), H(B) und H(A∩B).
+                        💡 <strong>Vorteil dieser Methode:</strong> Du brauchst keine vollständige Vierfeldtafel. Es reichen H(Ā), H(B̄) und H(Ā∩B̄).
                     </div>
                 </div>
                 <div class="step-nav">
@@ -795,11 +795,11 @@
                     <div class="merkschema">
                         <h3>📋 Merkschema – Methode 2</h3>
                         <div class="merkschema-formula">
-                            H(A∪B) = H(A) + H(B) − H(A∩B)
+                            H(Ā∪B̄) = H(Ā) + H(B̄) − H(Ā∩B̄)
                         </div>
                         <div class="merkschema-example">
-                            <strong>Sportclub-Beispiel:</strong><br>
-                            H(A∪B) = 34 + 26 − 15 = <strong>45</strong><br><br>
+                            <strong>Dopingtest-Beispiel:</strong><br>
+                            H(Ā∪B̄) = 920 + 880 − 870 = <strong>930</strong><br><br>
                             ✓ Addiere die Zeilensumme und Spaltensumme<br>
                             ✓ Ziehe den Schnitt ab (er wurde doppelt gezählt)
                         </div>
@@ -816,12 +816,12 @@
                 <div class="quiz-container">
                     <div class="quiz-title">✓ Teste dein Verständnis</div>
                     <div class="quiz-question">
-                        <h4>Frage 1: Warum zieht man H(A∩B) ab?</h4>
+                        <h4>Frage 1: Warum zieht man H(Ā∩B̄) ab?</h4>
                         <div class="quiz-options" id="p2q1-opts"></div>
                         <div class="quiz-feedback" id="p2q1-fb"></div>
                     </div>
                     <div class="quiz-question">
-                        <h4>Frage 2: H(A) = 34, H(B) = 26, H(A∩B) = 15. Was ist H(A∪B)?</h4>
+                        <h4>Frage 2: H(Ā) = 920, H(B̄) = 880, H(Ā∩B̄) = 870. Was ist H(Ā∪B̄)?</h4>
                         <div class="quiz-options" id="p2q2-opts"></div>
                         <div class="quiz-feedback" id="p2q2-fb"></div>
                     </div>
@@ -840,7 +840,7 @@
             <button class="back-button" onclick="goBack()">← Übersicht</button>
             <div class="pathway-header">
                 <h2>Methode 3: Über das Gegenereignis</h2>
-                <p>H(A∪B) = N − H(Ā∩B̄)</p>
+                <p>H(Ā∪B̄) = N − H(A∩B)</p>
             </div>
 
             <!-- SCHRITT 1 -->
@@ -853,12 +853,12 @@
                     <p>Manchmal ist es leichter, das Gegenteil zu betrachten:</p>
                     <div class="example-box">
                         <h4>💡 Idee:</h4>
-                        <p>Statt zu fragen „Wer trainiert ODER mag Mathe?", fragen wir:<br><br>
-                        „Wer trainiert <strong>NICHT</strong> UND mag Mathe <strong>NICHT</strong>?"<br><br>
+                        <p>Statt zu fragen „Wer ist nicht gedopt ODER testet negativ?", fragen wir:<br><br>
+                        „Wer ist <strong>gedopt</strong> UND testet <strong>positiv</strong>?"<br><br>
                         Diese Personen abziehen ergibt die Antwort!</p>
                     </div>
                     <div class="note-box">
-                        Das Gegenereignis von „A ODER B" ist „NICHT A UND NICHT B" = Ā∩B̄
+                        Das Gegenereignis von „Ā ODER B̄" ist „A UND B" = A∩B
                     </div>
                 </div>
                 <div class="step-nav">
@@ -878,33 +878,33 @@
                         <table>
                             <tr>
                                 <th></th>
-                                <th>Mag Mathe<br>(B)</th>
-                                <th>Mag Mathe<br>nicht (B̄)</th>
+                                <th>Test positiv<br>(B)</th>
+                                <th>Test negativ<br>(B̄)</th>
                                 <th>Gesamt</th>
                             </tr>
                             <tr>
-                                <th>Trainiert (A)</th>
-                                <td>15</td>
-                                <td>19</td>
-                                <td class="total-col">34</td>
+                                <th>Gedopt (A)</th>
+                                <td class="highlight-no">70 ← A∩B</td>
+                                <td>10</td>
+                                <td class="total-col">80</td>
                             </tr>
                             <tr>
-                                <th>Trainiert<br>nicht (Ā)</th>
-                                <td>11</td>
-                                <td class="highlight-no">30 ← Ā∩B̄</td>
-                                <td class="total-col">41</td>
+                                <th>Nicht gedopt<br>(Ā)</th>
+                                <td>50</td>
+                                <td>870</td>
+                                <td class="total-col">920</td>
                             </tr>
                             <tr class="total-row">
                                 <th>Gesamt</th>
-                                <td>26</td>
-                                <td>49</td>
-                                <td>75</td>
+                                <td>120</td>
+                                <td>880</td>
+                                <td>1000</td>
                             </tr>
                         </table>
                     </div>
-                    <p>Das rote Feld (30 Personen) ist das Gegenereignis Ā∩B̄ – <strong>weder trainiert noch Mathe</strong>.</p>
+                    <p>Das rote Feld (70 Spieler) ist das Gegenereignis A∩B – <strong>gedopt UND positiv getestet</strong>.</p>
                     <div class="note-box">
-                        Alle anderen 45 Personen gehören zu A∪B!
+                        Alle anderen 930 Spieler gehören zu Ā∪B̄!
                     </div>
                 </div>
                 <div class="step-nav">
@@ -921,9 +921,9 @@
                 </div>
                 <div class="step-body">
                     <div class="example-box">
-                        <h4>📊 Sportclub:</h4>
-                        <p>H(Ā∩B̄) = <strong>30</strong> (weder trainiert noch Mathe)<br>
-                        Gesamtzahl N = <strong>75</strong></p>
+                        <h4>📊 Dopingtest:</h4>
+                        <p>H(A∩B) = <strong>70</strong> (gedopt und positiv getestet)<br>
+                        Gesamtzahl N = <strong>1000</strong></p>
                     </div>
                     <div class="mini-table-container">
                         <p>Vierfeldtafel mit markiertem Feld:</p>
@@ -935,40 +935,66 @@
                             </tr>
                             <tr>
                                 <th>A</th>
-                                <td>15</td>
-                                <td>19</td>
+                                <td class="hlr">70</td>
+                                <td>10</td>
                             </tr>
                             <tr>
                                 <th>Ā</th>
-                                <td>11</td>
-                                <td class="hlr">30</td>
+                                <td>50</td>
+                                <td>870</td>
                             </tr>
                         </table>
                     </div>
                     <div class="formula-box">
-                        H(A∪B) = 75 − 30 = <strong>45</strong>
+                        H(Ā∪B̄) = 1000 − 70 = <strong>930</strong>
                     </div>
                     <div class="result-box">
-                        ✓ <strong>45 Mitglieder</strong> trainieren regelmäßig ODER mögen Mathematik!
+                        ✓ <strong>930 Spieler</strong> sind nicht gedopt oder testen negativ!
                     </div>
                 </div>
                 <div class="step-nav">
                     <button class="btn-secondary" onclick="showStep(2,3)">← Zurück</button>
-                    <button class="btn-primary" onclick="showStep(4,3)">Zum Quiz →</button>
+                    <button class="btn-primary" onclick="showStep(4,3)">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- SCHRITT 4: MERKSCHEMA -->
+            <div class="step" data-step="4">
+                <div class="step-header">
+                    <span class="step-badge">Schritt 4</span>
+                    <span class="step-title">Merkschema</span>
+                </div>
+                <div class="step-body">
+                    <div class="merkschema">
+                        <h3>📋 Merkschema – Methode 3</h3>
+                        <div class="merkschema-formula">
+                            H(Ā∪B̄) = N − H(A∩B)
+                        </div>
+                        <div class="merkschema-example">
+                            <strong>Dopingtest-Beispiel:</strong><br>
+                            H(Ā∪B̄) = 1000 − 70 = <strong>930</strong><br><br>
+                            ✓ Lies das rote Feld (A∩B) der Tafel ab<br>
+                            ✓ Ziehe von der Gesamtzahl ab
+                        </div>
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-secondary" onclick="showStep(3,3)">← Zurück</button>
+                    <button class="btn-primary" onclick="showStep(5,3)">Zum Quiz →</button>
                 </div>
             </div>
 
             <!-- QUIZ -->
-            <div class="step" data-step="4">
+            <div class="step" data-step="5">
                 <div class="quiz-container">
                     <div class="quiz-title">✓ Teste dein Verständnis</div>
                     <div class="quiz-question">
-                        <h4>Frage 1: Was ist das Gegenereignis von A∪B?</h4>
+                        <h4>Frage 1: Was ist das Gegenereignis von Ā∪B̄?</h4>
                         <div class="quiz-options" id="p3q1-opts"></div>
                         <div class="quiz-feedback" id="p3q1-fb"></div>
                     </div>
                     <div class="quiz-question">
-                        <h4>Frage 2: N = 100, H(Ā∩B̄) = 25. Was ist H(A∪B)?</h4>
+                        <h4>Frage 2: N = 100, H(A∩B) = 5. Was ist H(Ā∪B̄)?</h4>
                         <div class="quiz-options" id="p3q2-opts"></div>
                         <div class="quiz-feedback" id="p3q2-fb"></div>
                     </div>
@@ -976,7 +1002,7 @@
                     <div class="completion-message" id="p3-complete">🎉 Perfekt! Du beherrschst die Gegenereignis-Methode!</div>
                 </div>
                 <div class="step-nav">
-                    <button class="btn-secondary" onclick="showStep(3,3)">← Zurück</button>
+                    <button class="btn-secondary" onclick="showStep(4,3)">← Zurück</button>
                     <button class="btn-primary" onclick="selectPathway(4)">Zur Zusammenfassung →</button>
                 </div>
             </div>
@@ -991,40 +1017,41 @@
             <div class="summary-grid">
                 <div class="summary-card">
                     <h4>Methode 1 – Direkt aus der Tafel</h4>
-                    <div class="summary-formula">H(A∪B) = H(A∩B) + H(A∩B̄) + H(Ā∩B)</div>
+                    <div class="summary-formula">H(Ā∪B̄) = H(Ā∩B̄) + H(Ā∩B) + H(A∩B̄)</div>
                     <div class="summary-table-wrapper">
                         <table class="summary-table">
                             <tr><th></th><th>B</th><th>B̄</th></tr>
-                            <tr><th>A</th><td class="hl">✓</td><td class="hl">✓</td></tr>
-                            <tr><th>Ā</th><td class="hl">✓</td><td class="hlr">✗</td></tr>
+                            <tr><th>A</th><td class="hlr">✗</td><td class="hl">✓</td></tr>
+                            <tr><th>Ā</th><td class="hl">✓</td><td class="hl">✓</td></tr>
                         </table>
                     </div>
-                    <p>✓ Alle 4 Felder sichtbar &nbsp;✓ Schnellster Weg</p>
+                    <p>✓ 870 + 50 + 10 = 930 &nbsp;✓ Das rote Feld (70) wird nicht gezählt</p>
                 </div>
                 <div class="summary-card">
                     <h4>Methode 2 – Additionssatz</h4>
-                    <div class="summary-formula">H(A∪B) = H(A) + H(B) − H(A∩B)</div>
+                    <div class="summary-formula">H(Ā∪B̄) = H(Ā) + H(B̄) − H(Ā∩B̄)</div>
                     <div class="summary-table-wrapper">
                         <table class="summary-table">
                             <tr><th></th><th>B</th><th>B̄</th><th style="background:#e8ecf5;">Σ</th></tr>
-                            <tr><th>A</th><td class="hl">✓</td><td style="background:white;">−</td><td class="tot">✓</td></tr>
-                            <tr><th>Ā</th><td style="background:white;">−</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
-                            <tr><th style="background:#e8ecf5;">Σ</th><td class="tot">✓</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
+                            <tr><th>A</th><td style="background:white;">−</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
+                            <tr><th>Ā</th><td style="background:white;">−</td><td class="hl">✓</td><td class="tot">✓</td></tr>
+                            <tr><th style="background:#e8ecf5;">Σ</th><td style="background:white;">−</td><td class="tot">✓</td><td style="background:white;">−</td></tr>
                         </table>
                     </div>
-                    <p>✓ Nur Randsummen nötig &nbsp;✓ Universell einsetzbar</p>
+                    <p>✓ 920 + 880 − 870 = 930 &nbsp;✓ Nur Randsummen nötig</p>
                 </div>
                 <div class="summary-card">
                     <h4>Methode 3 – Gegenereignis</h4>
-                    <div class="summary-formula">H(A∪B) = N − H(Ā∩B̄)</div>
+                    <div class="summary-formula">H(Ā∪B̄) = N − H(A∩B)</div>
                     <div class="summary-table-wrapper">
                         <table class="summary-table">
-                            <tr><th></th><th>B</th><th>B̄</th></tr>
-                            <tr><th>A</th><td style="background:white;">−</td><td style="background:white;">−</td></tr>
-                            <tr><th>Ā</th><td style="background:white;">−</td><td class="hlr">✓</td></tr>
+                            <tr><th></th><th>B</th><th>B̄</th><th style="background:#e8ecf5;">Σ</th></tr>
+                            <tr><th>A</th><td class="hlr">✓</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
+                            <tr><th>Ā</th><td style="background:white;">−</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
+                            <tr><th style="background:#e8ecf5;">Σ</th><td style="background:white;">−</td><td style="background:white;">−</td><td class="tot" style="font-weight:bold;">✓</td></tr>
                         </table>
                     </div>
-                    <p>✓ Wenn Ā∩B̄ besonders klein &nbsp;✓ Eleganter Umweg</p>
+                    <p>✓ 1000 − 70 = 930 &nbsp;✓ Nur H(A∩B) und N nötig</p>
                 </div>
             </div>
 
@@ -1033,7 +1060,7 @@
             <!-- SZENARIO 1 -->
             <div class="scenario-card">
                 <div class="scenario-badge">Szenario 1 → Methode 1</div>
-                <h4>Klassenumfrage: Sport oder Musik?</h4>
+                <h4>Klassenumfrage: Nicht Sport oder nicht Musik?</h4>
                 <p style="font-size:0.88em; color:#555; margin-bottom:10px;">30 Schüler wurden gefragt. Die vollständige Tafel liegt vor:</p>
                 <div class="table-wrapper">
                     <table class="scenario-table">
@@ -1045,14 +1072,14 @@
                         </tr>
                         <tr>
                             <th>Sport (A)</th>
-                            <td class="hl">8</td>
+                            <td class="hlr">8</td>
                             <td class="hl">10</td>
                             <td class="tot">18</td>
                         </tr>
                         <tr>
                             <th>Kein Sport (Ā)</th>
                             <td class="hl">6</td>
-                            <td class="hlr">6</td>
+                            <td class="hl">6</td>
                             <td class="tot">12</td>
                         </tr>
                         <tr>
@@ -1064,7 +1091,7 @@
                     </table>
                 </div>
                 <div class="quiz-question" style="margin-top:14px;">
-                    <h4>Wie viele Schüler treiben Sport ODER hören Musik?</h4>
+                    <h4>Wie viele Schüler treiben NICHT Sport ODER hören NICHT Musik?</h4>
                     <div class="quiz-options" id="s1-opts"></div>
                     <div class="quiz-feedback" id="s1-fb"></div>
                     <p style="font-size:0.82em; color:#888; margin-top:8px;">Tipp: Addiere die 3 gelben Felder!</p>
@@ -1074,18 +1101,18 @@
             <!-- SZENARIO 2 -->
             <div class="scenario-card">
                 <div class="scenario-badge">Szenario 2 → Methode 2</div>
-                <h4>Kino-Umfrage: Nur Randwerte bekannt</h4>
+                <h4>Kino-Umfrage: Nicht Action oder nicht Komödie?</h4>
                 <p style="font-size:0.88em; color:#555; margin-bottom:10px;">Von 50 Befragten:</p>
                 <ul style="font-size:0.88em; color:#444; margin-left:16px; margin-bottom:10px; line-height:1.8;">
-                    <li>H(A) = 30 mögen Actionfilme</li>
-                    <li>H(B) = 25 mögen Komödien</li>
-                    <li>H(A∩B) = 10 mögen beides</li>
+                    <li>H(Ā) = 20 mögen NICHT Actionfilme</li>
+                    <li>H(B̄) = 25 mögen NICHT Komödien</li>
+                    <li>H(Ā∩B̄) = 10 mögen weder Action noch Komödie</li>
                 </ul>
                 <div class="quiz-question" style="margin-top:14px;">
-                    <h4>Wie viele mögen Action ODER Komödie?</h4>
+                    <h4>Wie viele mögen NICHT Action ODER NICHT Komödie?</h4>
                     <div class="quiz-options" id="s2-opts"></div>
                     <div class="quiz-feedback" id="s2-fb"></div>
-                    <p style="font-size:0.82em; color:#888; margin-top:8px;">Tipp: H(A) + H(B) − H(A∩B)</p>
+                    <p style="font-size:0.82em; color:#888; margin-top:8px;">Tipp: H(Ā) + H(B̄) − H(Ā∩B̄)</p>
                 </div>
             </div>
 
@@ -1093,12 +1120,12 @@
             <div class="scenario-card">
                 <div class="scenario-badge">Szenario 3 → Methode 3</div>
                 <h4>Schulkantine: Fast alle mögen etwas</h4>
-                <p style="font-size:0.88em; color:#555; margin-bottom:10px;">80 Schüler wurden gefragt, ob sie Pasta (A) oder Salat (B) mögen. Nur <strong>5 Schüler mögen weder Pasta noch Salat</strong>.</p>
+                <p style="font-size:0.88em; color:#555; margin-bottom:10px;">80 Schüler wurden gefragt. Nur <strong>5 Schüler mögen sowohl Pasta als auch Salat</strong> (und damit weder Pasta noch Salat ist für diese nicht relevant).</p>
                 <div class="quiz-question" style="margin-top:14px;">
-                    <h4>Wie viele Schüler mögen Pasta ODER Salat?</h4>
+                    <h4>Wie viele Schüler mögen NICHT Pasta ODER NICHT Salat?</h4>
                     <div class="quiz-options" id="s3-opts"></div>
                     <div class="quiz-feedback" id="s3-fb"></div>
-                    <p style="font-size:0.82em; color:#888; margin-top:8px;">Tipp: N − H(Ā∩B̄)</p>
+                    <p style="font-size:0.82em; color:#888; margin-top:8px;">Tipp: N − H(A∩B)</p>
                 </div>
             </div>
 
@@ -1152,23 +1179,23 @@
     function initQuizzes() {
         // Pfad 1, Frage 1
         const p1q1_options = [
-            { text: 'Trainiert UND Mathe (15)', value: 'w1' },
-            { text: 'Weder trainiert noch Mathe (30)', value: 'c' },
-            { text: 'Trainiert, keine Mathe (19)', value: 'w2' }
+            { text: 'Nicht gedopt UND negativ (870)', value: 'w1' },
+            { text: 'Gedopt UND positiv (70)', value: 'c' },
+            { text: 'Nicht gedopt, aber positiv (50)', value: 'w2' }
         ];
         shuffleAndRender('p1q1-opts', p1q1_options, 'p1q1');
 
         // Pfad 1, Frage 2
         const p1q2_options = [
-            { text: '34', value: 'w1' },
-            { text: '45', value: 'c' },
-            { text: '75', value: 'w2' }
+            { text: '80', value: 'w1' },
+            { text: '930', value: 'c' },
+            { text: '1000', value: 'w2' }
         ];
         shuffleAndRender('p1q2-opts', p1q2_options, 'p1q2');
 
         // Pfad 2, Frage 1
         const p2q1_options = [
-            { text: 'Weil H(A∩B) in H(A) und H(B) doppelt enthalten ist', value: 'c' },
+            { text: 'Weil H(Ā∩B̄) in H(Ā) und H(B̄) doppelt enthalten ist', value: 'c' },
             { text: 'Es ist eine Konvention ohne Bedeutung', value: 'w1' },
             { text: 'Weil der Schnitt nicht zur Vereinigung gehört', value: 'w2' }
         ];
@@ -1176,31 +1203,31 @@
 
         // Pfad 2, Frage 2
         const p2q2_options = [
-            { text: '60', value: 'w1' },
-            { text: '45', value: 'c' },
-            { text: '35', value: 'w2' }
+            { text: '1800', value: 'w1' },
+            { text: '930', value: 'c' },
+            { text: '50', value: 'w2' }
         ];
         shuffleAndRender('p2q2-opts', p2q2_options, 'p2q2');
 
         // Pfad 3, Frage 1
         const p3q1_options = [
-            { text: 'Ā∩B̄ (weder A noch B)', value: 'c' },
-            { text: 'A∩B', value: 'w1' },
+            { text: 'A∩B (gedopt und positiv)', value: 'c' },
+            { text: 'Ā∩B̄ (nicht gedopt und negativ)', value: 'w1' },
             { text: 'Ā∪B̄', value: 'w2' }
         ];
         shuffleAndRender('p3q1-opts', p3q1_options, 'p3q1');
 
         // Pfad 3, Frage 2
         const p3q2_options = [
-            { text: '75', value: 'c' },
-            { text: '25', value: 'w1' },
+            { text: '95', value: 'c' },
+            { text: '5', value: 'w1' },
             { text: '50', value: 'w2' }
         ];
         shuffleAndRender('p3q2-opts', p3q2_options, 'p3q2');
 
         // Szenario 1
         const s1_options = [
-            { text: '24', value: 'c' },
+            { text: '22', value: 'c' },
             { text: '18', value: 'w1' },
             { text: '30', value: 'w2' }
         ];
@@ -1208,9 +1235,9 @@
 
         // Szenario 2
         const s2_options = [
-            { text: '45', value: 'c' },
-            { text: '55', value: 'w1' },
-            { text: '35', value: 'w2' }
+            { text: '35', value: 'c' },
+            { text: '45', value: 'w1' },
+            { text: '25', value: 'w2' }
         ];
         shuffleAndRender('s2-opts', s2_options, 's2');
 
@@ -1235,33 +1262,33 @@
         p1: {
             questions: [
                 { name: 'p1q1', correct: 'c', fb: 'p1q1-fb',
-                  ok: '✓ Richtig! Das Feld "weder noch" (Ā∩B̄) gehört nicht zu A∪B.',
-                  fail: '✗ Das Feld "weder noch" (Ā∩B̄) ist das einzige, das nicht zu A∪B gehört!' },
+                  ok: '✓ Richtig! Das Feld "gedopt und positiv" (A∩B) gehört nicht zu Ā∪B̄.',
+                  fail: '✗ Das Feld "gedopt und positiv" (A∩B) ist das einzige, das nicht zu Ā∪B̄ gehört!' },
                 { name: 'p1q2', correct: 'c', fb: 'p1q2-fb',
-                  ok: '✓ Richtig! 15 + 19 + 11 = 45.',
-                  fail: '✗ Addiere die 3 gelben Felder: 15 + 19 + 11 = 45.' }
+                  ok: '✓ Richtig! 870 + 50 + 10 = 930.',
+                  fail: '✗ Addiere die 3 gelben Felder: 870 + 50 + 10 = 930.' }
             ],
             complete: 'p1-complete'
         },
         p2: {
             questions: [
                 { name: 'p2q1', correct: 'c', fb: 'p2q1-fb',
-                  ok: '✓ Genau! Der Schnitt ist doppelt in H(A) und H(B) enthalten.',
-                  fail: '✗ H(A∩B) ist sowohl in H(A) als auch in H(B) enthalten – also doppelt gezählt!' },
+                  ok: '✓ Genau! Der Schnitt ist doppelt in H(Ā) und H(B̄) enthalten.',
+                  fail: '✗ H(Ā∩B̄) ist sowohl in H(Ā) als auch in H(B̄) enthalten – also doppelt gezählt!' },
                 { name: 'p2q2', correct: 'c', fb: 'p2q2-fb',
-                  ok: '✓ Richtig! 34 + 26 − 15 = 45.',
-                  fail: '✗ Rechne: 34 + 26 − 15 = 45.' }
+                  ok: '✓ Richtig! 920 + 880 − 870 = 930.',
+                  fail: '✗ Rechne: 920 + 880 − 870 = 930.' }
             ],
             complete: 'p2-complete'
         },
         p3: {
             questions: [
                 { name: 'p3q1', correct: 'c', fb: 'p3q1-fb',
-                  ok: '✓ Korrekt! Das Gegenereignis von A∪B ist Ā∩B̄.',
-                  fail: '✗ Das Gegenereignis von A∪B ist Ā∩B̄ (weder A noch B).' },
+                  ok: '✓ Korrekt! Das Gegenereignis von Ā∪B̄ ist A∩B.',
+                  fail: '✗ Das Gegenereignis von Ā∪B̄ ist A∩B (gedopt UND positiv).' },
                 { name: 'p3q2', correct: 'c', fb: 'p3q2-fb',
-                  ok: '✓ Richtig! 100 − 25 = 75.',
-                  fail: '✗ Rechne: 100 − 25 = 75.' }
+                  ok: '✓ Richtig! 100 − 5 = 95.',
+                  fail: '✗ Rechne: 100 − 5 = 95.' }
             ],
             complete: 'p3-complete'
         }
@@ -1290,11 +1317,11 @@
     function checkScenarios() {
         const scenarios = [
             { name: 's1', correct: 'c', fb: 's1-fb',
-              ok: '✓ Richtig! 8 + 10 + 6 = 24 (Methode 1).',
-              fail: '✗ Addiere die 3 gelben Felder: 8 + 10 + 6 = 24.' },
+              ok: '✓ Richtig! 6 + 10 + 6 = 22 (Methode 1).',
+              fail: '✗ Addiere die 3 gelben Felder: 6 + 10 + 6 = 22.' },
             { name: 's2', correct: 'c', fb: 's2-fb',
-              ok: '✓ Richtig! 30 + 25 − 10 = 45 (Methode 2).',
-              fail: '✗ Additionssatz: 30 + 25 − 10 = 45.' },
+              ok: '✓ Richtig! 20 + 25 − 10 = 35 (Methode 2).',
+              fail: '✗ Additionssatz: 20 + 25 − 10 = 35.' },
             { name: 's3', correct: 'c', fb: 's3-fb',
               ok: '✓ Richtig! 80 − 5 = 75 (Methode 3).',
               fail: '✗ Gegenereignis: 80 − 5 = 75.' }
