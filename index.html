@@ -93,17 +93,6 @@
         }
         .pathway-card-text h3 { color: #333; font-size: 1em; margin-bottom: 5px; }
         .pathway-card-text p { color: #666; font-size: 0.88em; line-height: 1.5; }
-        .difficulty {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
-        .difficulty.easy { background: #d4edda; color: #155724; }
-        .difficulty.medium { background: #fff3cd; color: #856404; }
-        .difficulty.hard { background: #f8d7da; color: #721c24; }
 
         /* PATHWAY PAGES */
         .pathway-content { display: none; }
@@ -267,6 +256,37 @@
             font-size: 0.88em;
             line-height: 1.6;
         }
+
+        /* Quiz table in quiz steps */
+        .quiz-table-container {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            border-left: 4px solid #667eea;
+        }
+        .quiz-table-container p {
+            font-size: 0.78em;
+            color: #666;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        .quiz-table {
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            font-size: 0.78em;
+        }
+        .quiz-table th, .quiz-table td {
+            border: 1px solid #999;
+            padding: 5px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .quiz-table th { background: #667eea; color: white; font-weight: bold; }
+        .quiz-table td.hl { background: #fffacd; font-weight: bold; }
+        .quiz-table td.hlr { background: #ffd6d6; font-weight: bold; }
+        .quiz-table td.tot { background: #e8ecf5; font-weight: bold; }
 
         /* STEP NAV */
         .step-nav {
@@ -471,7 +491,6 @@
                     <div class="pathway-card-text">
                         <h3>Direkt aus der Tafel ablesen</h3>
                         <p>Addiere die passenden Felder direkt in der Vierfeldtafel – einfach und schnell.</p>
-                        <span class="difficulty easy">🟢 Leicht</span>
                     </div>
                 </div>
                 <div class="pathway-card" onclick="selectPathway(2)">
@@ -479,7 +498,6 @@
                     <div class="pathway-card-text">
                         <h3>Der Additionssatz</h3>
                         <p>Nutze die Formel: H(Ā∪B̄) = H(Ā) + H(B̄) − H(Ā∩B̄)</p>
-                        <span class="difficulty medium">🟡 Mittel</span>
                     </div>
                 </div>
                 <div class="pathway-card" onclick="selectPathway(3)">
@@ -487,15 +505,13 @@
                     <div class="pathway-card-text">
                         <h3>Über das Gegenereignis</h3>
                         <p>Berechne H(Ā∪B̄) = N − H(A∩B) – der elegante Umweg.</p>
-                        <span class="difficulty hard">🔴 Anspruchsvoll</span>
                     </div>
                 </div>
                 <div class="pathway-card" onclick="selectPathway(4)">
                     <div class="pathway-number">∑</div>
                     <div class="pathway-card-text">
-                        <h3>Zusammenfassung & Übung</h3>
+                        <h3>Zusammenfassung &amp; Übung</h3>
                         <p>Alle drei Methoden im Überblick – mit Übungsaufgaben.</p>
-                        <span class="difficulty easy">🟣 Alle Methoden</span>
                     </div>
                 </div>
             </div>
@@ -615,10 +631,10 @@
                         H(Ā∪B̄) = 870 + 50 + 10 = <strong>930</strong>
                     </div>
                     <div class="result-box">
-                        ✓ <strong>930 Spieler</strong> sind entweder nicht gedopt ODER testen negativ (oder beides).
+                        ✓ <strong>930 Spieler</strong> sind entweder nicht gedopt ODER positiv getestet (oder beides).
                     </div>
                     <div class="note-box">
-                        💡 Die 70 Spieler im roten Feld (gedopt UND positiv) werden nicht mitgezählt!
+                        💡 Die 70 Spieler im roten Feld (gedopt UND positiv getestet) werden nicht mitgezählt!
                     </div>
                 </div>
                 <div class="step-nav">
@@ -643,7 +659,7 @@
                             <strong>Dopingtest-Beispiel:</strong><br>
                             H(Ā∪B̄) = 870 + 50 + 10 = <strong>930</strong><br><br>
                             ✓ Addiere die 3 gelben Felder.<br>
-                            ✓ Das rote Feld (gedopt UND positiv) bleibt außen vor.
+                            ✓ Das rote Feld (gedopt UND positiv getestet) bleibt außen vor.
                         </div>
                     </div>
                 </div>
@@ -657,6 +673,38 @@
             <div class="step" data-step="5">
                 <div class="quiz-container">
                     <div class="quiz-title">✓ Teste dein Verständnis</div>
+
+                    <!-- Vierfeldtafel im Quiz -->
+                    <div class="quiz-table-container">
+                        <p>Vierfeldtafel – Dopingtest:</p>
+                        <table class="quiz-table">
+                            <tr>
+                                <th></th>
+                                <th>Test positiv (B)</th>
+                                <th>Test negativ (B̄)</th>
+                                <th>Gesamt</th>
+                            </tr>
+                            <tr>
+                                <th>Gedopt (A)</th>
+                                <td class="hlr">70</td>
+                                <td class="hl">10</td>
+                                <td class="tot">80</td>
+                            </tr>
+                            <tr>
+                                <th>Nicht gedopt (Ā)</th>
+                                <td class="hl">50</td>
+                                <td class="hl">870</td>
+                                <td class="tot">920</td>
+                            </tr>
+                            <tr>
+                                <th>Gesamt</th>
+                                <td class="tot">120</td>
+                                <td class="tot">880</td>
+                                <td class="tot">1000</td>
+                            </tr>
+                        </table>
+                    </div>
+
                     <div class="quiz-question">
                         <h4>Frage 1: Welches Feld gehört NICHT zu Ā∪B̄?</h4>
                         <div class="quiz-options" id="p1q1-opts"></div>
@@ -696,12 +744,12 @@
                         <h4>📊 Dopingtest:</h4>
                         <p><strong>H(Ā)</strong> = nicht gedopt = <strong>920</strong><br>
                         <strong>H(B̄)</strong> = negativ getestet = <strong>880</strong><br>
-                        <strong>H(Ā∩B̄)</strong> = nicht gedopt UND negativ = <strong>870</strong></p>
+                        <strong>H(Ā∩B̄)</strong> = nicht gedopt UND negativ getestet = <strong>870</strong></p>
                     </div>
                     <p style="margin-top:14px;">Was passiert, wenn wir einfach addieren?</p>
                     <div class="formula-box">920 + 880 = <strong>1800</strong> ?</div>
                     <div class="note-box">
-                        ⚠️ <strong>Achtung!</strong> Die 870 Spieler, die nicht gedopt sind UND negativ testen, wurden zweimal gezählt – einmal in H(Ā) und einmal in H(B̄)!
+                        ⚠️ <strong>Achtung!</strong> Die 870 Spieler, die nicht gedopt sind UND negativ getestet werden, wurden zweimal gezählt – einmal in H(Ā) und einmal in H(B̄)!
                     </div>
                 </div>
                 <div class="step-nav">
@@ -815,6 +863,38 @@
             <div class="step" data-step="5">
                 <div class="quiz-container">
                     <div class="quiz-title">✓ Teste dein Verständnis</div>
+
+                    <!-- Vierfeldtafel im Quiz -->
+                    <div class="quiz-table-container">
+                        <p>Vierfeldtafel – Dopingtest:</p>
+                        <table class="quiz-table">
+                            <tr>
+                                <th></th>
+                                <th>Test positiv (B)</th>
+                                <th>Test negativ (B̄)</th>
+                                <th>Gesamt</th>
+                            </tr>
+                            <tr>
+                                <th>Gedopt (A)</th>
+                                <td>70</td>
+                                <td>10</td>
+                                <td class="tot">80</td>
+                            </tr>
+                            <tr>
+                                <th>Nicht gedopt (Ā)</th>
+                                <td>50</td>
+                                <td class="hl">870 ← 2×</td>
+                                <td class="tot">920</td>
+                            </tr>
+                            <tr>
+                                <th>Gesamt</th>
+                                <td class="tot">120</td>
+                                <td class="tot">880</td>
+                                <td class="tot">1000</td>
+                            </tr>
+                        </table>
+                    </div>
+
                     <div class="quiz-question">
                         <h4>Frage 1: Warum zieht man H(Ā∩B̄) ab?</h4>
                         <div class="quiz-options" id="p2q1-opts"></div>
@@ -853,8 +933,8 @@
                     <p>Manchmal ist es leichter, das Gegenteil zu betrachten:</p>
                     <div class="example-box">
                         <h4>💡 Idee:</h4>
-                        <p>Statt zu fragen „Wer ist nicht gedopt ODER testet negativ?", fragen wir:<br><br>
-                        „Wer ist <strong>gedopt</strong> UND testet <strong>positiv</strong>?"<br><br>
+                        <p>Statt zu fragen „Wer ist nicht gedopt ODER wird negativ getestet?", fragen wir:<br><br>
+                        „Wer ist <strong>gedopt</strong> UND wird <strong>positiv getestet</strong>?"<br><br>
                         Diese Personen abziehen ergibt die Antwort!</p>
                     </div>
                     <div class="note-box">
@@ -949,7 +1029,7 @@
                         H(Ā∪B̄) = 1000 − 70 = <strong>930</strong>
                     </div>
                     <div class="result-box">
-                        ✓ <strong>930 Spieler</strong> sind nicht gedopt oder testen negativ!
+                        ✓ <strong>930 Spieler</strong> sind nicht gedopt oder werden negativ getestet!
                     </div>
                 </div>
                 <div class="step-nav">
@@ -988,6 +1068,38 @@
             <div class="step" data-step="5">
                 <div class="quiz-container">
                     <div class="quiz-title">✓ Teste dein Verständnis</div>
+
+                    <!-- Vierfeldtafel im Quiz -->
+                    <div class="quiz-table-container">
+                        <p>Vierfeldtafel – Dopingtest:</p>
+                        <table class="quiz-table">
+                            <tr>
+                                <th></th>
+                                <th>Test positiv (B)</th>
+                                <th>Test negativ (B̄)</th>
+                                <th>Gesamt</th>
+                            </tr>
+                            <tr>
+                                <th>Gedopt (A)</th>
+                                <td class="hlr">70</td>
+                                <td>10</td>
+                                <td class="tot">80</td>
+                            </tr>
+                            <tr>
+                                <th>Nicht gedopt (Ā)</th>
+                                <td>50</td>
+                                <td>870</td>
+                                <td class="tot">920</td>
+                            </tr>
+                            <tr>
+                                <th>Gesamt</th>
+                                <td class="tot">120</td>
+                                <td class="tot">880</td>
+                                <td class="tot">1000</td>
+                            </tr>
+                        </table>
+                    </div>
+
                     <div class="quiz-question">
                         <h4>Frage 1: Was ist das Gegenereignis von Ā∪B̄?</h4>
                         <div class="quiz-options" id="p3q1-opts"></div>
@@ -1179,9 +1291,9 @@
     function initQuizzes() {
         // Pfad 1, Frage 1
         const p1q1_options = [
-            { text: 'Nicht gedopt UND negativ (870)', value: 'w1' },
-            { text: 'Gedopt UND positiv (70)', value: 'c' },
-            { text: 'Nicht gedopt, aber positiv (50)', value: 'w2' }
+            { text: 'Nicht gedopt UND negativ getestet (870)', value: 'w1' },
+            { text: 'Gedopt UND positiv getestet (70)', value: 'c' },
+            { text: 'Nicht gedopt, aber positiv getestet (50)', value: 'w2' }
         ];
         shuffleAndRender('p1q1-opts', p1q1_options, 'p1q1');
 
@@ -1211,8 +1323,8 @@
 
         // Pfad 3, Frage 1
         const p3q1_options = [
-            { text: 'A∩B (gedopt und positiv)', value: 'c' },
-            { text: 'Ā∩B̄ (nicht gedopt und negativ)', value: 'w1' },
+            { text: 'A∩B (gedopt und positiv getestet)', value: 'c' },
+            { text: 'Ā∩B̄ (nicht gedopt und negativ getestet)', value: 'w1' },
             { text: 'Ā∪B̄', value: 'w2' }
         ];
         shuffleAndRender('p3q1-opts', p3q1_options, 'p3q1');
@@ -1262,8 +1374,8 @@
         p1: {
             questions: [
                 { name: 'p1q1', correct: 'c', fb: 'p1q1-fb',
-                  ok: '✓ Richtig! Das Feld "gedopt und positiv" (A∩B) gehört nicht zu Ā∪B̄.',
-                  fail: '✗ Das Feld "gedopt und positiv" (A∩B) ist das einzige, das nicht zu Ā∪B̄ gehört!' },
+                  ok: '✓ Richtig! Das Feld "gedopt und positiv getestet" (A∩B) gehört nicht zu Ā∪B̄.',
+                  fail: '✗ Das Feld "gedopt und positiv getestet" (A∩B) ist das einzige, das nicht zu Ā∪B̄ gehört!' },
                 { name: 'p1q2', correct: 'c', fb: 'p1q2-fb',
                   ok: '✓ Richtig! 870 + 50 + 10 = 930.',
                   fail: '✗ Addiere die 3 gelben Felder: 870 + 50 + 10 = 930.' }
@@ -1285,7 +1397,7 @@
             questions: [
                 { name: 'p3q1', correct: 'c', fb: 'p3q1-fb',
                   ok: '✓ Korrekt! Das Gegenereignis von Ā∪B̄ ist A∩B.',
-                  fail: '✗ Das Gegenereignis von Ā∪B̄ ist A∩B (gedopt UND positiv).' },
+                  fail: '✗ Das Gegenereignis von Ā∪B̄ ist A∩B (gedopt UND positiv getestet).' },
                 { name: 'p3q2', correct: 'c', fb: 'p3q2-fb',
                   ok: '✓ Richtig! 100 − 5 = 95.',
                   fail: '✗ Rechne: 100 − 5 = 95.' }
