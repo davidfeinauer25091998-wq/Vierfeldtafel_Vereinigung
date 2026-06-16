@@ -532,6 +532,9 @@
                     <span class="step-title">Was bedeutet A∪B?</span>
                 </div>
                 <div class="step-body">
+                    <div class="note-box" style="background:#e7f3ff; border-left-color:#0066cc;">
+                        <strong>📋 Aufgabenstellung:</strong> Wie viele Spieler sind <strong>gedopt ODER positiv getestet</strong>?
+                    </div>
                     <div class="example-box">
                         <h4>📊 Dopingtest:</h4>
                         <p><strong>A</strong> = gedopt<br>
@@ -740,9 +743,14 @@
                     <span class="step-title">Das Problem mit einfachem Addieren</span>
                 </div>
                 <div class="step-body">
+                    <div class="note-box" style="background:#e7f3ff; border-left-color:#0066cc;">
+                        <strong>📋 Aufgabenstellung:</strong> Wie viele Spieler sind <strong>gedopt ODER positiv getestet</strong>?
+                    </div>
                     <div class="example-box">
                         <h4>📊 Dopingtest:</h4>
-                        <p><strong>H(A)</strong> = gedopt = <strong>60</strong><br>
+                        <p><strong>A</strong> = gedopt<br>
+                        <strong>B</strong> = positiv getestet<br><br>
+                        <strong>H(A)</strong> = gedopt = <strong>60</strong><br>
                         <strong>H(B)</strong> = positiv getestet = <strong>50</strong><br>
                         <strong>H(A∩B)</strong> = gedopt UND positiv getestet = <strong>30</strong></p>
                     </div>
@@ -930,15 +938,19 @@
                     <span class="step-title">Die umgekehrte Perspektive</span>
                 </div>
                 <div class="step-body">
+                    <div class="note-box" style="background:#e7f3ff; border-left-color:#0066cc;">
+                        <strong>📋 Aufgabenstellung:</strong> Wie viele Spieler sind <strong>gedopt ODER positiv getestet</strong>?
+                    </div>
                     <p>Manchmal ist es leichter, das Gegenteil zu betrachten:</p>
                     <div class="example-box">
                         <h4>💡 Idee:</h4>
                         <p>Statt zu fragen „Wer ist gedopt ODER wird positiv getestet?", fragen wir:<br><br>
-                        „Wer ist <strong>nicht gedopt</strong> UND wird <strong>nicht positiv getestet</strong>?"<br><br>
+                        „Wer ist <strong>weder gedopt noch positiv getestet</strong>?"<br><br>
                         Diese Personen von der Gesamtzahl abziehen ergibt die Antwort!</p>
                     </div>
                     <div class="note-box">
-                        Das Gegenereignis von „A ODER B" ist „nicht A UND nicht B" = Ā∩B̄
+                        Das Gegenereignis von „A ODER B" ist „nicht A UND nicht B" = Ā∩B̄<br>
+                        Alternative Formulierung: <strong>„Weder gedopt noch positiv getestet"</strong>
                     </div>
                 </div>
                 <div class="step-nav">
@@ -1012,16 +1024,25 @@
                                 <th></th>
                                 <th>B</th>
                                 <th>B̄</th>
+                                <th>Σ</th>
                             </tr>
                             <tr>
                                 <th>A</th>
                                 <td>30</td>
                                 <td>30</td>
+                                <td class="total-col">60</td>
                             </tr>
                             <tr>
                                 <th>Ā</th>
                                 <td>20</td>
                                 <td class="hlr">20</td>
+                                <td class="total-col">40</td>
+                            </tr>
+                            <tr class="total-row">
+                                <th>Σ</th>
+                                <td class="total-col">50</td>
+                                <td class="total-col">50</td>
+                                <td class="total-col">100</td>
                             </tr>
                         </table>
                     </div>
@@ -1145,12 +1166,12 @@
                     <div class="summary-table-wrapper">
                         <table class="summary-table">
                             <tr><th></th><th>B</th><th>B̄</th><th style="background:#e8ecf5;">Σ</th></tr>
-                            <tr><th>A</th><td style="background:white;">−</td><td style="background:white;">−</td><td class="tot">✓</td></tr>
-                            <tr><th>Ā</th><td style="background:white;">−</td><td style="background:white;">−</td><td class="tot">−</td></tr>
-                            <tr><th style="background:#e8ecf5;">Σ</th><td class="tot">✓</td><td class="tot">✓</td><td style="background:white;">−</td></tr>
+                            <tr><th>A</th><td class="hl">✓</td><td style="background:white;">−</td><td class="tot">✓</td></tr>
+                            <tr><th>Ā</th><td style="background:white;">−</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
+                            <tr><th style="background:#e8ecf5;">Σ</th><td class="tot">✓</td><td style="background:white;">−</td><td style="background:white;">−</td></tr>
                         </table>
                     </div>
-                    <p>✓ 60 + 50 − 30 = 80 &nbsp;✓ Nur Randsummen nötig</p>
+                    <p>✓ 60 + 50 − 30 = 80 &nbsp;✓ Braucht H(A), H(B) und H(A∩B)</p>
                 </div>
                 <div class="summary-card">
                     <h4>Methode 3 – Gegenereignis</h4>
