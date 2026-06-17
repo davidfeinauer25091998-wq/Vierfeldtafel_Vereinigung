@@ -456,6 +456,68 @@
         .scenario-table td.hlr { background: #ffd6d6; font-weight: bold; }
         .scenario-table td.tot { background: #f0f0f0; font-weight: bold; }
 
+        /* EXERCISE SPECIFIC */
+        .exercise-box {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .exercise-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 0.98em;
+        }
+        .exercise-content {
+            color: #444;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .input-group {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .input-group input[type="text"], .input-group input[type="number"] {
+            padding: 6px 8px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9em;
+            flex: 1;
+        }
+        .input-group input:focus { outline: none; border-color: #667eea; }
+        .input-group button {
+            padding: 6px 12px;
+            font-size: 0.85em;
+        }
+        .table-fill-exercise {
+            font-size: 0.75em;
+            margin: 10px 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table-fill-exercise th, .table-fill-exercise td {
+            border: 1px solid #999;
+            padding: 6px 4px;
+            text-align: center;
+        }
+        .table-fill-exercise th { background: #667eea; color: white; font-weight: bold; }
+        .table-fill-exercise input {
+            width: 90%;
+            padding: 4px 2px;
+            border: 1px solid #999;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        .table-fill-exercise td.read-only {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
         @media (max-width: 400px) {
             header h1 { font-size: 1.25em; }
             .main-content { padding: 16px 12px 24px; }
@@ -512,6 +574,13 @@
                     <div class="pathway-card-text">
                         <h3>Zusammenfassung &amp; Übung</h3>
                         <p>Alle drei Methoden im Überblick – mit Übungsaufgaben.</p>
+                    </div>
+                </div>
+                <div class="pathway-card" onclick="selectPathway(5)">
+                    <div class="pathway-number">✎</div>
+                    <div class="pathway-card-text">
+                        <h3>Zusatzaufgaben zum Vertiefen</h3>
+                        <p>Gemischte Aufgaben in verschiedenen Formaten – Multiple Choice, Tafelausfüllen, Rechnen.</p>
                     </div>
                 </div>
             </div>
@@ -1273,6 +1342,174 @@
             </div>
         </div>
 
+        <!-- PATHWAY 5: ZUSATZAUFGABEN -->
+        <div id="pathway-5" class="pathway-content">
+            <button class="back-button" onclick="goBack()">← Übersicht</button>
+            <div class="pathway-header">
+                <h2>Zusatzaufgaben zum Vertiefen</h2>
+                <p>Vermischte Aufgaben in verschiedenen Formaten</p>
+            </div>
+
+            <div class="step active" data-step="1">
+                <div class="step-body">
+                    <div class="note-box" style="background:#e7f3ff; border-left-color:#0066cc; margin-bottom:20px;">
+                        <strong>💡 Hier sind 8 Aufgaben zum Trainieren!</strong> Die Aufgaben kombinieren Multiple Choice, Tafelausfüllen und Rechnungen. Schaffst du alle?
+                    </div>
+
+                    <!-- Aufgabe 1: Multiple Choice -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">Aufgabe 1: Verständnis der Vereinigung</div>
+                        <div class="exercise-content">
+                            <p>In einer Schulbibliothek wurden 100 Schüler befragt:</p>
+                            <ul style="margin: 8px 0 12px 18px;">
+                                <li>20 Schüler leihen sich Bücher aus</li>
+                                <li>30 Schüler leihen sich Comics aus</li>
+                                <li>8 Schüler leihen sich beides aus</li>
+                            </ul>
+                            <p><strong>Wie viele Schüler leihen sich Bücher ODER Comics aus?</strong></p>
+                        </div>
+                        <div class="quiz-options" id="ex1-opts"></div>
+                        <div class="quiz-feedback" id="ex1-fb"></div>
+                    </div>
+
+                    <!-- Aufgabe 2: Gegenereignis-Verständnis -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">Aufgabe 2: Das Gegenereignis erkennen</div>
+                        <div class="exercise-content">
+                            <p>Du berechnest H(A∪B) mit der Formel H(A∪B) = N − H(Ā∩B̄).</p>
+                            <p><strong>Was stellt H(Ā∩B̄) dar?</strong></p>
+                        </div>
+                        <div class="quiz-options" id="ex2-opts"></div>
+                        <div class="quiz-feedback" id="ex2-fb"></div>
+                    </div>
+
+                    <!-- Aufgabe 3: Tafel ergänzen -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">Aufgabe 3: Vierfeldtafel ergänzen</div>
+                        <div class="exercise-content">
+                            <p style="margin-bottom:10px;">Ergänze die fehlenden Werte. N = 200 gesamt.</p>
+                            <div class="table-wrapper">
+                                <table class="table-fill-exercise">
+                                    <tr>
+                                        <th></th>
+                                        <th>B</th>
+                                        <th>B̄</th>
+                                        <th>Gesamt</th>
+                                    </tr>
+                                    <tr>
+                                        <th>A</th>
+                                        <td><input type="number" id="ex3-ab" placeholder="?"></td>
+                                        <td class="read-only">40</td>
+                                        <td class="read-only">100</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ā</th>
+                                        <td class="read-only">30</td>
+                                        <td><input type="number" id="ex3-abar" placeholder="?"></td>
+                                        <td class="read-only">100</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gesamt</th>
+                                        <td class="read-only">90</td>
+                                        <td class="read-only">110</td>
+                                        <td class="read-only">200</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <button class="btn-primary" style="width:100%; margin-top:10px;" onclick="checkEx3()">Prüfen</button>
+                            <div class="quiz-feedback" id="ex3-fb"></div>
+                        </div>
+                    </div>
+
+                    <!-- Aufgabe 4: Formel wählen -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">Aufgabe 4: Richtige Formel wählen</div>
+                        <div class="exercise-content">
+                            <p>Du kennst: H(A) = 80, H(B) = 60, H(A∩B) = 25. Die Vierfeldtafel hast du nicht.</p>
+                            <p><strong>Welche Methode passt am besten?</strong></p>
+                        </div>
+                        <div class="quiz-options" id="ex4-opts"></div>
+                        <div class="quiz-feedback" id="ex4-fb"></div>
+                    </div>
+
+                    <!-- Aufgabe 5: Rechnung mit Gegenereignis -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">Aufgabe 5: Mit dem Gegenereignis rechnen</div>
+                        <div class="exercise-content">
+                            <p>Bei einer Umfrage mit 250 Personen:</p>
+                            <ul style="margin: 8px 0 12px 18px;">
+                                <li>H(Ā∩B̄) = 35 (weder das eine noch das andere)</li>
+                            </ul>
+                            <p><strong>Wie viele gehören zu A∪B?</strong></p>
+                        </div>
+                        <div class="quiz-options" id="ex5-opts"></div>
+                        <div class="quiz-feedback" id="ex5-fb"></div>
+                    </div>
+
+                    <!-- Aufgabe 6: Additionssatz anwenden -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">Aufgabe 6: Additionssatz anwenden</div>
+                        <div class="exercise-content">
+                            <p>An einer Schule mit 600 Schülern:</p>
+                            <ul style="margin: 8px 0 12px 18px;">
+                                <li>H(A) = 240 spielen Fußball</li>
+                                <li>H(B) = 180 spielen Basketball</li>
+                                <li>H(A∩B) = 60 spielen beide</li>
+                            </ul>
+                            <p><strong>Wie viele spielen Fußball ODER Basketball?</strong></p>
+                        </div>
+                        <div class="quiz-options" id="ex6-opts"></div>
+                        <div class="quiz-feedback" id="ex6-fb"></div>
+                    </div>
+
+                    <!-- Aufgabe 7: Fehlersuche -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">Aufgabe 7: Fehler finden</div>
+                        <div class="exercise-content">
+                            <p>Eine Schule mit 150 Schülern.</p>
+                            <ul style="margin: 8px 0 12px 18px;">
+                                <li>H(A) = 50 spielen Klavier</li>
+                                <li>H(B) = 40 singen im Chor</li>
+                                <li>H(A∩B) = 12 machen beides</li>
+                            </ul>
+                            <p>Jemand rechnet:</p>
+                            <div class="formula-box" style="background:#f8d7da;">
+                                H(A∪B) = 50 + 40 = 90
+                            </div>
+                            <p><strong>Was ist hier falsch?</strong></p>
+                        </div>
+                        <div class="quiz-options" id="ex7-opts"></div>
+                        <div class="quiz-feedback" id="ex7-fb"></div>
+                    </div>
+
+                    <!-- Aufgabe 8: Logisches Denken -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">Aufgabe 8: Logik-Check</div>
+                        <div class="exercise-content">
+                            <p>In einer Vierfeldtafel:</p>
+                            <ul style="margin: 8px 0 12px 18px;">
+                                <li>H(A∩B) = 50</li>
+                                <li>H(A∪B) = 60</li>
+                            </ul>
+                            <p><strong>Kann das stimmen?</strong></p>
+                        </div>
+                        <div class="quiz-options" id="ex8-opts"></div>
+                        <div class="quiz-feedback" id="ex8-fb"></div>
+                    </div>
+
+                    <button class="btn-success" onclick="checkAllExercises()" style="width: 100%; margin-top: 20px;">Alle Aufgaben prüfen</button>
+                    <div class="completion-message" id="exercises-complete">
+                        🌟 Großartig! Du hast alle Aufgaben gemeistert – du bist ein Vereinigungs-Profi!
+                    </div>
+                </div>
+
+                <div class="step-nav" style="margin-top:20px;">
+                    <button class="btn-secondary" onclick="goBack()">← Übersicht</button>
+                    <button class="btn-primary" onclick="selectPathway(4)">Zur Zusammenfassung</button>
+                </div>
+            </div>
+        </div>
+
     </div><!-- /main-content -->
 </div><!-- /container -->
 
@@ -1284,8 +1521,7 @@
         const target = n === 0 ? document.getElementById('start-page') : document.getElementById('pathway-' + n);
         if (target) target.classList.add('active');
 
-        // Reset steps
-        if (n > 0 && n < 4) {
+        if (n > 0 && n < 5) {
             const steps = target.querySelectorAll('.step');
             steps.forEach((s, i) => {
                 s.classList.remove('active');
@@ -1308,9 +1544,7 @@
 
     function goBack() { selectPathway(0); }
 
-    // Randomisiere Quiz-Antworten
     function initQuizzes() {
-        // Pfad 1, Frage 1
         const p1q1_options = [
             { text: 'Gedopt und positiv getestet (30)', value: 'w1' },
             { text: 'Nicht gedopt und negativ getestet (20)', value: 'c' },
@@ -1318,7 +1552,6 @@
         ];
         shuffleAndRender('p1q1-opts', p1q1_options, 'p1q1');
 
-        // Pfad 1, Frage 2
         const p1q2_options = [
             { text: '60', value: 'w1' },
             { text: '80', value: 'c' },
@@ -1326,7 +1559,6 @@
         ];
         shuffleAndRender('p1q2-opts', p1q2_options, 'p1q2');
 
-        // Pfad 2, Frage 1
         const p2q1_options = [
             { text: 'Weil H(A∩B) in H(A) und H(B) doppelt enthalten ist', value: 'c' },
             { text: 'Es ist eine Konvention ohne Bedeutung', value: 'w1' },
@@ -1334,7 +1566,6 @@
         ];
         shuffleAndRender('p2q1-opts', p2q1_options, 'p2q1');
 
-        // Pfad 2, Frage 2
         const p2q2_options = [
             { text: '110', value: 'w1' },
             { text: '80', value: 'c' },
@@ -1342,7 +1573,6 @@
         ];
         shuffleAndRender('p2q2-opts', p2q2_options, 'p2q2');
 
-        // Pfad 3, Frage 1
         const p3q1_options = [
             { text: 'Ā∩B̄ (nicht gedopt und nicht positiv getestet)', value: 'c' },
             { text: 'A∩B (gedopt und positiv getestet)', value: 'w1' },
@@ -1350,7 +1580,6 @@
         ];
         shuffleAndRender('p3q1-opts', p3q1_options, 'p3q1');
 
-        // Pfad 3, Frage 2
         const p3q2_options = [
             { text: '85', value: 'c' },
             { text: '15', value: 'w1' },
@@ -1358,7 +1587,6 @@
         ];
         shuffleAndRender('p3q2-opts', p3q2_options, 'p3q2');
 
-        // Szenario 1
         const s1_options = [
             { text: '24', value: 'c' },
             { text: '18', value: 'w1' },
@@ -1366,7 +1594,6 @@
         ];
         shuffleAndRender('s1-opts', s1_options, 's1');
 
-        // Szenario 2
         const s2_options = [
             { text: '48', value: 'c' },
             { text: '63', value: 'w1' },
@@ -1374,13 +1601,65 @@
         ];
         shuffleAndRender('s2-opts', s2_options, 's2');
 
-        // Szenario 3
         const s3_options = [
             { text: '75', value: 'c' },
             { text: '5', value: 'w1' },
             { text: '80', value: 'w2' }
         ];
         shuffleAndRender('s3-opts', s3_options, 's3');
+
+        initExercises();
+    }
+
+    function initExercises() {
+        const ex1_options = [
+            { text: '42', value: 'c' },
+            { text: '50', value: 'w1' },
+            { text: '28', value: 'w2' }
+        ];
+        shuffleAndRender('ex1-opts', ex1_options, 'ex1');
+
+        const ex2_options = [
+            { text: 'Personen, die weder A noch B haben', value: 'c' },
+            { text: 'Personen, die A oder B haben', value: 'w1' },
+            { text: 'Personen, die A und B haben', value: 'w2' }
+        ];
+        shuffleAndRender('ex2-opts', ex2_options, 'ex2');
+
+        const ex4_options = [
+            { text: 'Methode 2 – Additionssatz', value: 'c' },
+            { text: 'Methode 1 – Direkt aus der Tafel', value: 'w1' },
+            { text: 'Methode 3 – Gegenereignis', value: 'w2' }
+        ];
+        shuffleAndRender('ex4-opts', ex4_options, 'ex4');
+
+        const ex5_options = [
+            { text: '215', value: 'c' },
+            { text: '35', value: 'w1' },
+            { text: '250', value: 'w2' }
+        ];
+        shuffleAndRender('ex5-opts', ex5_options, 'ex5');
+
+        const ex6_options = [
+            { text: '360', value: 'c' },
+            { text: '420', value: 'w1' },
+            { text: '300', value: 'w2' }
+        ];
+        shuffleAndRender('ex6-opts', ex6_options, 'ex6');
+
+        const ex7_options = [
+            { text: 'H(A∩B) wurde nicht abgezogen', value: 'c' },
+            { text: 'Die Zahlen sind zu klein', value: 'w1' },
+            { text: 'Das Ergebnis ist eigentlich korrekt', value: 'w2' }
+        ];
+        shuffleAndRender('ex7-opts', ex7_options, 'ex7');
+
+        const ex8_options = [
+            { text: 'Nein, H(A∩B) kann nie größer als H(A∪B) sein', value: 'c' },
+            { text: 'Ja, das ist möglich', value: 'w1' },
+            { text: 'Nur wenn H(A∩B) = H(A∪B)', value: 'w2' }
+        ];
+        shuffleAndRender('ex8-opts', ex8_options, 'ex8');
     }
 
     function shuffleAndRender(containerId, options, radioName) {
@@ -1477,7 +1756,67 @@
         if (allCorrect) document.getElementById('summary-complete').classList.add('show');
     }
 
-    // Init
+    function checkEx3() {
+        const ab = parseInt(document.getElementById('ex3-ab').value);
+        const abar = parseInt(document.getElementById('ex3-abar').value);
+        const fb = document.getElementById('ex3-fb');
+        if (isNaN(ab) || isNaN(abar)) {
+            fb.textContent = '⚠️ Bitte füllen Sie beide Felder aus!';
+            fb.className = 'quiz-feedback show incorrect';
+            return;
+        }
+        const correct = ab === 60 && abar === 70;
+        if (correct) {
+            fb.textContent = '✓ Richtig! A∩B = 60 (weil 90 − 30), Ā∩B̄ = 70 (weil 110 − 40).';
+            fb.className = 'quiz-feedback show correct';
+        } else {
+            fb.textContent = '✗ Noch nicht ganz. A∩B sollte 60 sein (Spaltensumme B ist 90, minus Ā∩B = 30), und Ā∩B̄ sollte 70 sein (Spaltensumme B̄ ist 110, minus A∩B̄ = 40).';
+            fb.className = 'quiz-feedback show incorrect';
+        }
+    }
+
+    function checkAllExercises() {
+        const exercises = [
+            { name: 'ex1', correct: 'c', fb: 'ex1-fb',
+              ok: '✓ Richtig! 20 + 30 − 8 = 42 (Additionssatz)',
+              fail: '✗ Nutze den Additionssatz: 20 + 30 − 8 = 42' },
+            { name: 'ex2', correct: 'c', fb: 'ex2-fb',
+              ok: '✓ Korrekt! Das ist das Gegenereignis von A∪B.',
+              fail: '✗ Ā∩B̄ sind Personen, die WEDER das eine NOR das andere haben.' },
+            { name: 'ex4', correct: 'c', fb: 'ex4-fb',
+              ok: '✓ Richtig! Mit H(A), H(B) und H(A∩B) nutzt du Methode 2.',
+              fail: '✗ Ohne vollständige Tafel wählst du den Additionssatz (Methode 2).' },
+            { name: 'ex5', correct: 'c', fb: 'ex5-fb',
+              ok: '✓ Richtig! 250 − 35 = 215 (Methode 3).',
+              fail: '✗ Gegenereignis: 250 − 35 = 215.' },
+            { name: 'ex6', correct: 'c', fb: 'ex6-fb',
+              ok: '✓ Richtig! 240 + 180 − 60 = 360 (Additionssatz).',
+              fail: '✗ Additionssatz: 240 + 180 − 60 = 360.' },
+            { name: 'ex7', correct: 'c', fb: 'ex7-fb',
+              ok: '✓ Korrekt! Der Schnitt H(A∩B) = 12 wurde nicht abgezogen. Richtig: 50 + 40 − 12 = 78.',
+              fail: '✗ Der Fehler ist, dass H(A∩B) = 12 nicht abgezogen wurde (doppelt gezählt). Richtig: 50 + 40 − 12 = 78.' },
+            { name: 'ex8', correct: 'c', fb: 'ex8-fb',
+              ok: '✓ Richtig! H(A∩B) ist immer eine Teilmenge von H(A∪B).',
+              fail: '✗ Der Schnitt kann nie größer als die Vereinigung sein.' }
+        ];
+        let allAnswered = true, allCorrect = true;
+        exercises.forEach(e => {
+            const sel = document.querySelector(`input[name="${e.name}"]:checked`);
+            if (!sel) { allAnswered = false; return; }
+            const fb = document.getElementById(e.fb);
+            if (sel.value === e.correct) {
+                fb.textContent = e.ok;
+                fb.className = 'quiz-feedback show correct';
+            } else {
+                fb.textContent = e.fail;
+                fb.className = 'quiz-feedback show incorrect';
+                allCorrect = false;
+            }
+        });
+        if (!allAnswered) { alert('Bitte beantworte alle Fragen!'); return; }
+        if (allCorrect) document.getElementById('exercises-complete').classList.add('show');
+    }
+
     initQuizzes();
     selectPathway(0);
 </script>
